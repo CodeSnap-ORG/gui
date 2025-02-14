@@ -1018,7 +1018,7 @@ class MenuBar extends React.Component {
                             {/* todo: icon */}
                             <Button className={styles.feedbackButton}>
                                 <FormattedMessage
-                                    defaultMessage="UltiBlocks Forum Topic"
+                                    defaultMessage="AmpMod Forum Topic"
                                     description="Button to give feedback in the menu bar"
                                     id="tw.topicButton"
                                     values={{
