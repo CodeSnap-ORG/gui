@@ -6,6 +6,7 @@ updates:
       interval: "daily"
     allow:
       - dependency-name: "@turbowarp/*"
+      - dependency-name: "@AmpM0d/*"
       - dependency-name: "scratch-audio"
       - dependency-name: "scratch-render"
       - dependency-name: "scratch-vm"
