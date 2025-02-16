@@ -421,6 +421,14 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
         ${blockSeparator}
         <block type="control_if"/>
         <block type="control_if_else"/>
+        <block type="control_ternary">
+            <value name="LEFT">
+                <shadow type="text"/>
+            </value>
+            <value name="RIGHT">
+                <shadow type="text"/>
+            </value>
+        </block>
         <block id="wait_until" type="control_wait_until"/>
         <block id="repeat_until" type="control_repeat_until"/>
         <block id="while" type="control_while"/>
@@ -446,16 +454,7 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
     </category>
     `;
 };
-/* For the sake for it:
-        <block type="control_ternary">
-            <value name="LEFT">
-                <shadow type="text"/>
-            </value>
-            <value name="RIGHT">
-                <shadow type="text"/>
-            </value>
-        </block>
-        */
+
 const sensing = function (isInitialSetup, isStage, targetId, colors) {
     const name = translate('SENSING_ASK_TEXT', 'What\'s your name?');
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
