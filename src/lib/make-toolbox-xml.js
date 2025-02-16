@@ -446,7 +446,16 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
     </category>
     `;
 };
-
+/* For the sake for it:
+        <block type="control_ternary">
+            <value name="LEFT">
+                <shadow type="text"/>
+            </value>
+            <value name="RIGHT">
+                <shadow type="text"/>
+            </value>
+        </block>
+        */
 const sensing = function (isInitialSetup, isStage, targetId, colors) {
     const name = translate('SENSING_ASK_TEXT', 'What\'s your name?');
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
@@ -522,6 +531,8 @@ const sensing = function (isInitialSetup, isStage, targetId, colors) {
         <block type="sensing_dayssince2000"/>
         ${blockSeparator}
         <block type="sensing_username"/>
+        <block type="argument_reporter_boolean"><field name="VALUE">is UltiBlocks?</field></block>
+        <block type="argument_reporter_boolean"><field name="VALUE">is compiled?</field></block>
         ${categorySeparator}
     </category>
     `;
@@ -747,9 +758,7 @@ const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
 
 // eslint-disable-next-line max-len
 const extraTurboWarpBlocks = `
-<block type="argument_reporter_boolean"><field name="VALUE">is compiled?</field></block>
 <block type="argument_reporter_boolean"><field name="VALUE">is TurboWarp?</field></block>
-<block type="argument_reporter_boolean"><field name="VALUE">is UltiBlocks?</field></block>
 `;
 /* eslint-enable no-unused-vars */
 
