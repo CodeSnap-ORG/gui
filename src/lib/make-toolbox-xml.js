@@ -308,6 +308,12 @@ const sound = function (isInitialSetup, isStage, targetId, soundName, colors) {
                     <field name="SOUND_MENU">${soundName}</field>
                 </shadow>
             </value>
+        </block><block id="${targetId}_sound_play_at_seconds" type="sound_play_at_seconds">
+            <value name="SOUND_MENU">
+                <shadow type="sound_sounds_menu">
+                    <field name="SOUND_MENU">${soundName}</field>
+                </shadow>
+            </value>
         </block>
         <block id="${targetId}_sound_play" type="sound_play">
             <value name="SOUND_MENU">
@@ -421,6 +427,17 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
         ${blockSeparator}
         <block type="control_if"/>
         <block type="control_if_else"/>
+        <block type="control_ternary">
+            <value name="CONDITION">
+                <shadow type="boolean"/>
+            </value>
+            <value name="LEFT">
+                <shadow type="text"/>
+            </value>
+            <value name="RIGHT">
+                <shadow type="text"/>
+            </value>
+        </block>
         <block id="wait_until" type="control_wait_until"/>
         <block id="repeat_until" type="control_repeat_until"/>
         <block id="while" type="control_while"/>
