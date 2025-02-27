@@ -533,7 +533,7 @@ const sensing = function (isInitialSetup, isStage, targetId, colors) {
         <block type="sensing_dayssince2000"/>
         ${blockSeparator}
         <block type="sensing_username"/>
-        <block type="argument_reporter_boolean"><field name="VALUE">is UltiBlocks?</field></block>
+        <block type="argument_reporter_boolean"><field name="VALUE">is AmpMod?</field></block>
         <block type="argument_reporter_boolean"><field name="VALUE">is compiled?</field></block>
         ${categorySeparator}
     </category>
