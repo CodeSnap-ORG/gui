@@ -16,7 +16,10 @@ jobs:
         node-version: 22.x
     - run: rm package-lock.json || true
     - run: npm i
-    - run: git add package-lock.json
+    - run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add package-lock.json
     - run: git commit -m "Automatic update of package-lock"
     - name: GitHub Push
       # You may pin to the exact commit or the version.
