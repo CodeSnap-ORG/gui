@@ -186,7 +186,7 @@ module.exports = [
                 chunks: ['editor'],
                 template: 'src/playground/index.ejs',
                 filename: 'editor.html',
-                title: `UltiBlocks`,
+                title: APP_NAME,
                 isEditor: true,
                 ...htmlWebpackPluginCommon
             }),
@@ -194,28 +194,28 @@ module.exports = [
                 chunks: ['player'],
                 template: 'src/playground/index.ejs',
                 filename: 'index.html',
-                title: `UltiBlocks`,
+                title: APP_NAME,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['fullscreen'],
                 template: 'src/playground/index.ejs',
                 filename: 'fullscreen.html',
-                title: `UltiBlocks`,
+                title: APP_NAME,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['embed'],
                 template: 'src/playground/embed.ejs',
                 filename: 'embed.html',
-                title: `Embedded Project - UltiBlocks`,
+                title: `Embedded Project - ${APP_NAME}`,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['addon-settings'],
                 template: 'src/playground/simple.ejs',
                 filename: 'addons.html',
-                title: `Addon Settings - UltiBlocks`,
+                title: `Addon Settings - ${APP_NAME}`,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
