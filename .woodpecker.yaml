@@ -31,14 +31,17 @@ steps:
       event: [push]
     # Use the official jekyll build container
     image: node
-    secrets: [cbtoken]
+    environment:
+      # secrets must be set in Woodpecker configuration
+      CBTOKEN:
+        from_secret: cbtoken
     commands:
       # Am i even allowed to do this?
       - apt-get update && apt-get install pypy3 default-jre-headless --no-install-recommends -y
       # Avoid permission denied errors
       - chmod -R a+w .
       # Set up git in a working way
-      - git config --global --add safe.directory /woodpecker/src/codeberg.org/AmpMod/scratcch-gui/build
+      - git config --global --add safe.directory /woodpecker/src/codeberg.org/AmpMod/scratch-gui/build
       - git config --global user.email "no@thankyou.com"
       - git config --global user.name "CI Builder"
       # clone and move the target repo
