@@ -50,14 +50,16 @@ steps:
       - cd build
       # Prepare for push
       - git remote set-url origin https://$CBTOKEN@codeberg.org/AmpMod/pages.git
+      - git rm -r -f ./**/*
+      - git commit -m 'Woodpecker CI - Clean up.'
       - cd ..
       # Run 11ty build stage
       - npm install
-      - npm run build
+      - npm run ci-build
       # Only needed for custom domains
       # - cp domains build/.domains
       # Push to target
       - cd build
       - git add --all
-      - git commit -m "Woodpecker CI 11ty Build at $( env TZ=America/Chicago date +'%Y-%m-%d %X %Z' )"
+      - git commit -m "Woodpecker CI Build at $( env TZ=America/Chicago date +'%Y-%m-%d %X %Z' )"
       - git push -u origin pages
