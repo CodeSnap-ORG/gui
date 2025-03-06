@@ -28,9 +28,9 @@ jobs:
       - name: Mirror to Codeberg
         run: |
           if [[ "${{ github.event_name }}" == "push" ]]; then
-            git push --mirror codeberg
+            git push --mirror codeberg || echo "error"
           elif [[ "${{ github.event_name }}" == "delete" ]]; then
-            git push codeberg --delete ${{ github.ref_name }}
+            git push codeberg --delete ${{ github.ref_name }} || echo "error"
           fi
 
       - name: Remove Codeberg remote
