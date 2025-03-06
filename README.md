@@ -1,4 +1,4 @@
-scratch-gui modified for use in [UltiBlocks](https://ultiblocks.github.io/)
+scratch-gui modified for use in AmpMod. Contributions are preferred to [Codeberg](https://codeberg.org/AmpMod/scratch-gui) but contributions on [GitHub](https://github.com/AmpM0d/scratch-gui) are accepted.
 
 ## Setup
 
