@@ -57,7 +57,7 @@ steps:
       - npm install
       - npm run ci-build
       # Only needed for custom domains
-      # - cp domains build/.domains
+      - cp domains build/.domains
       # Push to target
       - cd build
       - git add --all
