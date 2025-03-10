@@ -1102,13 +1102,13 @@ class AddonSettingsComponent extends React.Component {
                             />
                         </div>
                         <a
-                            href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                            href="https://scratch.mit.edu/discuss/topic/806311"
                             target="_blank"
                             rel="noreferrer"
                             className={styles.feedbackButtonOuter}
                         >
                             <span className={styles.feedbackButtonInner}>
-                                {settingsTranslations.addonFeedback}
+                                AmpMod Forum Topic
                             </span>
                         </a>
                     </div>

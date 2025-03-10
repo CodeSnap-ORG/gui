@@ -14,13 +14,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/colors.css";
 @import "../../css/filters.css";
 
 body {
     background-color: $page-background;
     color: $page-foreground;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     margin: 0;
 }
 

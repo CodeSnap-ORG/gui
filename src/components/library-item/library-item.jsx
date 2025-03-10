@@ -76,21 +76,14 @@ class LibraryItemComponent extends React.PureComponent {
                         src={this.props.iconURL}
                     />
                 </div>
-                {this.props.insetIconURL ? (
-                    <div className={styles.libraryItemInsetImageContainer}>
-                        <img
-                            className={styles.libraryItemInsetImage}
-                            src={this.props.insetIconURL}
-                            draggable={false}
-                        />
-                    </div>
-                ) : null}
                 <div
                     className={typeof this.props.extensionId === 'string' ?
                         classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
                     }
                 >
-                    <span className={styles.libraryItemName}>{this.props.name}</span>
+                    <span className={styles.libraryItemName}>
+                         {this.props.name}
+                    </span>
                     <br />
                     <span className={styles.featuredDescription}>{this.props.description}</span>
                 </div>

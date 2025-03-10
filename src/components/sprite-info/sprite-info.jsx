@@ -19,7 +19,10 @@ import xIcon from './icon--x.svg';
 import yIcon from './icon--y.svg';
 import showIcon from '!../../lib/tw-recolor/build!./icon--show.svg';
 import hideIcon from '!../../lib/tw-recolor/build!./icon--hide.svg';
+import draggableOnIcon from './icon--draggable-on.svg';
+import draggableOffIcon from './icon--draggable-off.svg';
 import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
+import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -38,6 +41,16 @@ const messages = defineMessages({
         id: 'gui.SpriteInfo.hideSpriteAction',
         defaultMessage: 'Hide sprite',
         description: 'Tooltip for hide sprite button'
+    },
+    draggableSpriteAction: {
+        id: 'gui.SpriteInfo.draggableSpriteAction',
+        defaultMessage: 'Draggable sprite',
+        description: 'Tooltip for draggable sprite button'
+    },
+    nonDraggableSpriteAction: {
+        id: 'gui.SpriteInfo.nonDraggableSpriteAction',
+        defaultMessage: 'Non-draggable sprite',
+        description: 'Tooltip for non-draggable sprite button'
     }
 });
 
@@ -66,13 +79,6 @@ class SpriteInfo extends React.Component {
                 defaultMessage="Sprite"
                 description="Sprite info label"
                 id="gui.SpriteInfo.sprite"
-            />
-        );
-        const showLabel = (
-            <FormattedMessage
-                defaultMessage="Show"
-                description="Sprite info show label"
-                id="gui.SpriteInfo.show"
             />
         );
         const sizeLabel = (
@@ -189,15 +195,7 @@ class SpriteInfo extends React.Component {
                     {yPosition}
                 </div>
                 <div className={classNames(styles.row, styles.rowSecondary)}>
-                    <div className={labelAbove ? styles.column : styles.group}>
-                        {
-                            stageSize === STAGE_DISPLAY_SIZES.full || stageSize === STAGE_DISPLAY_SIZES.large ?
-                                <Label
-                                    secondary
-                                    text={showLabel}
-                                /> :
-                                null
-                        }
+                    <div className={styles.group}>
                         <ToggleButtons
                             buttons={[
                                 {
@@ -216,7 +214,31 @@ class SpriteInfo extends React.Component {
                             disabled={this.props.disabled}
                         />
                     </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
+                    <div className={styles.group} disabled={true}>
+                        <ComingSoonTooltip
+                            place="bottom"
+                            tooltipId="draggable-tooltip"
+                        >
+                            <ToggleButtons
+                                buttons={[
+                                    {
+                                        handleClick: this.props.onClickDraggable,
+                                        icon: draggableOnIcon,
+                                        isSelected: this.props.draggable && !this.props.disabled,
+                                        title: this.props.intl.formatMessage(messages.draggableSpriteAction)
+                                    },
+                                    {
+                                        handleClick: this.props.onClickNonDraggable,
+                                        icon: draggableOffIcon,
+                                        isSelected: !this.props.draggable && !this.props.disabled,
+                                        title: this.props.intl.formatMessage(messages.nonDraggableSpriteAction)
+                                    }
+                                ]}
+                                disabled={this.props.disabled}
+                            />
+                        </ComingSoonTooltip>
+                    </div>
+                    <div className={styles.group}>
                         <Label
                             secondary
                             above={labelAbove}
@@ -233,7 +255,7 @@ class SpriteInfo extends React.Component {
                             />
                         </Label>
                     </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
+                    <div className={styles.group}>
                         <DirectionPicker
                             direction={Math.round(this.props.direction)}
                             disabled={this.props.disabled}
@@ -255,6 +277,7 @@ SpriteInfo.propTypes = {
         PropTypes.number
     ]),
     disabled: PropTypes.bool,
+    draggable: PropTypes.bool,
     intl: intlShape,
     name: PropTypes.string,
     onChangeDirection: PropTypes.func,
@@ -263,6 +286,8 @@ SpriteInfo.propTypes = {
     onChangeSize: PropTypes.func,
     onChangeX: PropTypes.func,
     onChangeY: PropTypes.func,
+    onClickDraggable: PropTypes.func,
+    onClickNonDraggable: PropTypes.func,
     onClickNotVisible: PropTypes.func,
     onClickVisible: PropTypes.func,
     rotationStyle: PropTypes.string,

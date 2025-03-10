@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/units.css";
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
 .page-wrapper {
     height: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .body-wrapper {
@@ -61,7 +63,7 @@
     align-items: flex-end;
     flex-shrink: 0;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
     font-size: 0.80rem;
 
@@ -75,9 +77,10 @@
 .tab {
     flex-grow: 1;
     height: 80%;
-    margin-bottom: 0;
+    margin-bottom: 0.2rem;
+    margin-left: 0.2rem; /* Increase margin to space out tabs */
 
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 0.8rem;
     border: 1px solid $ui-black-transparent;
 
     padding: 0.125rem 1.25rem 0;
@@ -92,22 +95,26 @@
 
     user-select: none;
     white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s, height 0.2s;
+
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: bold;
 }
 
 [dir="ltr"] .tab {
-    margin-left: -0.5rem;
+    margin-left: 0.2rem; /* Increase margin to space out tabs */
 }
 
 [dir="rtl"] .tab {
-    margin-right: -0.5rem;
+    margin-right: 0.2rem; /* Increase margin to space out tabs */
 }
 
 [dir="ltr"] .tab:nth-of-type(1) {
-    margin-left: 0;
+    margin-left: 0.2rem; /* Increase margin to space out tabs */
 }
 
 [dir="rtl"] .tab:nth-of-type(1) {
-    margin-right: 0;
+    margin-right: 0.2rem; /* Increase margin to space out tabs */
 }
 
 /* Use z-indices to force left-on-top for tabs */

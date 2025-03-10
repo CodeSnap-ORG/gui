@@ -2,8 +2,7 @@
 
 .outlined-button {
     cursor: pointer;
-    border-radius: $form-radius;
-    font-weight: bold;
+    border-radius: 4px; 
     display: flex;
     flex-direction: row;
     align-items: center;

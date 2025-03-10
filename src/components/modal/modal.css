@@ -1,6 +1,75 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/z-index.css";
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+@keyframes zoomFadeIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* New fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* New fade-out animation */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* New slide-out to bottom animation */
+@keyframes slideOutToBottom {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* New zoom-out animation */
+@keyframes zoomFadeOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
 
 .modal-overlay {
     position: fixed;
@@ -9,8 +78,18 @@
     right: 0;
     bottom: 0;
     z-index: $z-index-modal;
-    background-color: $ui-modal-overlay;
+    background-color: hsla(0, 0%, 0%, 0.5);
     color: $ui-modal-foreground;
+    transition: background-color 0.3s ease-out;
+    animation: fadeIn 0.3s ease-out; /* Apply fade-in animation */
+}
+
+.modal-overlay.full-screen {
+    background-color: transparent;
+}
+
+.modal-overlay.closing {
+    animation: fadeOut 0.35s ease-out; /* Apply fade-out animation when closing */
 }
 
 .modal-content * {
@@ -22,11 +101,12 @@
     outline: none;
     border: 4px solid $ui-white-transparent;
     padding: 0;
-    border-radius: $space;
+    border-radius: 1em;
     user-select: none;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     overflow: hidden;
+    animation: zoomFadeIn 0.3s ease-out;
 }
 
 .modal-content.full-screen {
@@ -46,6 +126,15 @@
     margin: 0;
     border: none;
     border-radius: 0;
+    animation: slideInFromBottom 0.3s ease-out;
+}
+
+.modal-content.closing {
+    animation: zoomFadeOut 0.35s ease-out; /* Apply zoom-out animation when closing */
+}
+
+.modal-content.full-screen.closing {
+    animation: slideOutToBottom 0.35s ease-out; /* Apply slide-out animation when closing if fullscreen */
 }
 
 
@@ -104,6 +193,9 @@ $sides: 20rem;
     user-select: none;
     letter-spacing: 0.4px;
     cursor: default;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold; /* Changed to bold */
 }
 
 [dir="ltr"] .header-item-title {

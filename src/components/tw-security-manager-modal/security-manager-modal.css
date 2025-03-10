@@ -3,11 +3,14 @@
 .modal-content {
     width: 440px;
     margin-top: 25px;
+    font-family: 'Cantarell', sans-serif;
 }
 
 .body {
     background: $ui-white;
     padding: 1rem 1.5rem;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 1.2rem;
 }
 
 .body p {

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 @import "../../css/default-colors.css";
@@ -12,10 +13,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'IBM Plex Sans', sans-serif;
     background-color: $menu-bar-background;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: white;
+    border-radius: 10px; /* Make the loader round */
+    overflow: hidden; /* Ensure content stays within the round shape */
 }
 
 .fullscreen {
@@ -23,6 +26,7 @@
     position: fixed;
     /* Use the fullscreen stage z-index to allow covering full-screen mode */
     z-index: $z-index-stage-wrapper-overlay;
+    border-radius: 0;
 }
 
 .block-animation {
@@ -189,4 +193,35 @@
     width: 0;
     height: 100%;
     background-color: $ui-white-default;
+}
+
+.customSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin: 20px 0;
+}
+
+.spinnerCircle {
+    width: 50px;
+    height: 50px;
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.funFact {
+    margin-top: 20px;
+    font-size: 0.9rem;
 }

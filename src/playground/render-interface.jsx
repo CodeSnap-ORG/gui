@@ -87,7 +87,7 @@ const Footer = () => (
             <div className={styles.footerText}>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="{APP_NAME} is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                    defaultMessage="{APP_NAME} is not affiliated with Scratch, the Scratch Team, the Scratch Foundation, or the TurboWarp developers."
                     description="Disclaimer that TurboWarp is not connected to Scratch"
                     id="tw.footer.disclaimer"
                     values={{
@@ -116,6 +116,26 @@ const Footer = () => (
                 />
             </div>
 
+            <div className={styles.footerText}>
+                <FormattedMessage
+                    // eslint-disable-next-line max-len
+                    defaultMessage="AmpMod is based off TurboWarp. It is available for free at {turboWarpOrg}."
+                    description="Attribution to TurboWarp. {turboWarpOrg} is a link with text 'https://turbowarp.org'"
+                    id="tw.footer.basedOnTurboWarp"
+                    values={{
+                        turboWarpOrg: (
+                            <a
+                                href="https://turbowarp.org/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {'https://turbowarp.org/'}
+                            </a>
+                        )
+                    }}
+                />
+            </div>
+
             <div className={styles.footerColumns}>
                 <div className={styles.footerSection}>
                     <a href="credits.html">
@@ -127,7 +147,7 @@ const Footer = () => (
                     </a>
                     <a href="https://github.com/sponsors/GarboMuffin">
                         <FormattedMessage
-                            defaultMessage="Donate"
+                            defaultMessage="Donate to TurboWarp"
                             description="Donation link in footer"
                             id="tw.footer.donate"
                         />
@@ -156,23 +176,33 @@ const Footer = () => (
                             id="tw.footer.parameters"
                         />
                     </a>
+                    <a href="https://ultiblocks.miraheze.org/">
+                        <FormattedMessage
+                            defaultMessage="AmpMod Wiki"
+                            description="Link in footer to wiki"
+                            id="tw.footer.wiki"
+                        />
+                    </a>
                     <a href="https://docs.turbowarp.org/">
                         <FormattedMessage
-                            defaultMessage="Documentation"
+                            defaultMessage="TurboWarp Documentation"
                             description="Link in footer to additional documentation"
                             id="tw.footer.documentation"
                         />
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                    <a href="https://scratch.mit.edu/discuss/topic/806311">
                         <FormattedMessage
-                            defaultMessage="Feedback & Bugs"
-                            description="Link to feedback/bugs page"
-                            id="tw.feedback"
+                            defaultMessage="AmpMod Forum Topic"
+                            description="Button to give feedback in the menu bar"
+                            id="tw.topicButton"
+                            values={{
+                                APP_NAME
+                            }}
                         />
                     </a>
-                    <a href="https://github.com/TurboWarp/">
+                    <a href="https://codeberg.org/AmpMod/">
                         <FormattedMessage
                             defaultMessage="Source Code"
                             description="Link to source code"
@@ -204,9 +234,9 @@ class Interface extends React.Component {
     }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {
-            document.title = `UltiBlocks Editor`;
+            document.title = `${APP_NAME}`;
         } else {
-            document.title = `${title} - UltiBlocks`;
+            document.title = `${title} - ${APP_NAME}`;
         }
     }
     render () {
@@ -267,9 +297,6 @@ class Interface extends React.Component {
                             {isBrowserSupported() ? null : (
                                 <BrowserModal isRtl={isRtl} />
                             )}
-                            <div className={styles.section}>
-                                <ProjectInput />
-                            </div>
                             {(
                                 // eslint-disable-next-line max-len
                                 description.instructions === 'unshared' || description.credits === 'unshared'
@@ -332,11 +359,31 @@ class Interface extends React.Component {
                                     />
                                 </div>
                             ) : null}
+                            <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
+                                <p>
+                                    <FormattedMessage
+                                        defaultMessage="AmpMod is in active development and things will change very often. For updates, visit {link}."
+                                        description="Notice about active development"
+                                        id="tw.development.notice"
+                                        values={{
+                                            link: (
+                                                <a
+                                                    href="https://scratch.mit.edu/discuss/topic/806311"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {'https://scratch.mit.edu/discuss/topic/806311'}
+                                                </a>
+                                            )
+                                        }}
+                                    />
+                                </p>
+                            </div>
                             <div className={styles.section}>
                                 <p>
                                     <FormattedMessage
                                         // eslint-disable-next-line max-len
-                                        defaultMessage="{APP_NAME} is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
+                                        defaultMessage="{APP_NAME} combines features from other Scratch modifications to give you the best Scratch programming interface you could imagine. We take features from other Scratch modifications, and put them into a single convenient package. AmpMod is developed by people like you - check the credits page to see who has contributed."
                                         description="Description of TurboWarp on the homepage"
                                         id="tw.home.description"
                                         values={{
@@ -344,9 +391,6 @@ class Interface extends React.Component {
                                         }}
                                     />
                                 </p>
-                            </div>
-                            <div className={styles.section}>
-                                <FeaturedProjects studio="27205657" />
                             </div>
                         </React.Fragment>
                     ) : null}

@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
 .inline-message {
     color: $menu-bar-foreground;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     display: flex;
     justify-content: flex-end;
     align-items: center;

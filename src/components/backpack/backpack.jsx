@@ -57,7 +57,10 @@ const Backpack = ({
     onMouseLeave,
     onMore
 }) => (
-    <div className={styles.backpackContainer}>
+    <div
+        className={styles.backpackContainer}
+        style={{ height: expanded ? 'auto' : '2rem' }} // Add this line
+    >
         <div
             className={styles.backpackHeader}
             onClick={onToggle}
@@ -89,6 +92,7 @@ const Backpack = ({
                 ref={containerRef}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
+                style={{ height: 'auto' }} // Add this line
             >
                 {/* eslint-disable-next-line no-negated-condition */}
                 {error !== false ? (

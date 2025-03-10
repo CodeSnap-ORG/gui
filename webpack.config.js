@@ -148,7 +148,9 @@ module.exports = [
             'fullscreen': './src/playground/fullscreen.jsx',
             'embed': './src/playground/embed.jsx',
             'addon-settings': './src/playground/addon-settings.jsx',
-            'credits': './src/playground/credits/credits.jsx'
+            'credits': './src/playground/credits/credits.jsx',
+            'home': './src/playground/home/home.jsx',
+            'terms': './src/playground/terms/terms.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build')
@@ -192,8 +194,8 @@ module.exports = [
             }),
             new HtmlWebpackPlugin({
                 chunks: ['player'],
-                template: 'src/playground/index.ejs',
-                filename: 'index.html',
+                template: 'src/playground/simple.ejs',
+                filename: 'player.html',
                 title: APP_NAME,
                 ...htmlWebpackPluginCommon
             }),
@@ -209,6 +211,20 @@ module.exports = [
                 template: 'src/playground/embed.ejs',
                 filename: 'embed.html',
                 title: `Embedded Project - ${APP_NAME}`,
+                ...htmlWebpackPluginCommon
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['home'],
+                template: 'src/playground/simple.ejs',
+                filename: 'index.html',
+                title: `Home - ${APP_NAME}`,
+                ...htmlWebpackPluginCommon
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['terms'],
+                template: 'src/playground/simple.ejs',
+                filename: 'terms.html',
+                title: `Terms of Service - ${APP_NAME}`,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({

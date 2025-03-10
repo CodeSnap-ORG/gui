@@ -21,6 +21,7 @@ const manifest = {
     }
   ],
   "dynamicDisable": true,
+  "enabledByDefault": true,
   "customCssVariables": [
     {
       "name": "lockDisplay",
@@ -83,7 +84,7 @@ const manifest = {
           "name": "Category click"
         }
       ],
-      "default": "cathover"
+      "default": "category"
     },
     {
       "dynamic": true,

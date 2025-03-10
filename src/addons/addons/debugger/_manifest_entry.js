@@ -31,6 +31,7 @@ const manifest = {
       "url": "style.css"
     }
   ],
+  "enabledByDefault": true,
   "settings": [
     {
       "dynamic": true,

@@ -1,0 +1,41 @@
+@import "../../css/colors.css";
+
+section {
+    text-align: center;
+}
+
+.notification {
+    background-color: $data-primary;
+    color: white;
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.primary-button {
+    background-color: white;
+    color: $looks-secondary !important;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.button {
+    background-color: $motion-primary;
+    color: white;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.center {
+    text-align: center;
+}
+
+.marginRight {
+    margin-right: 8px;
+}

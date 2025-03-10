@@ -6,10 +6,10 @@ const guiColors = {
     'looks-transparent': '#59C05959',
     'looks-light-transparent': '#59C05926',
     'looks-secondary-dark': 'hsla(120, 42%, 51%, 1)',
-    'extensions-primary': 'hsla(120, 85%, 65%, 1)',
-    'extensions-tertiary': 'hsla(120, 85%, 40%, 1)',
-    'extensions-transparent': 'hsla(120, 85%, 65%, 0.35)',
-    'extensions-light': 'hsla(120, 57%, 85%, 1)',
+    'extensions-primary': '#389438',
+    'extensions-tertiary': '#2e742e',
+    'extensions-transparent': 'hsla(120, 100%, 30%, 0.35)',
+    'extensions-light': '#4a9a4a',
     'drop-highlight': '#66bb6a'
 };
 

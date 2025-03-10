@@ -335,7 +335,8 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
     },
-    {
+    // Custom Reporters is commented out because it was moved to the base editor
+    /* {
         // not really an extension, but it's easiest to present it as one
         name: (
             <FormattedMessage
@@ -356,11 +357,11 @@ export default [
         tags: ['tw'],
         incompatibleWithScratch: true,
         featured: true
-    },
+    }, */
     {
         name: (
             <FormattedMessage
-                defaultMessage="{APP_NAME} Blocks"
+                defaultMessage="TurboWarp Blocks"
                 description="Name of the strange 'TurboWarp Blocks' extension"
                 id="tw.twExtension.name"
                 values={{

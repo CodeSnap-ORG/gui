@@ -12,7 +12,7 @@ import coolCatIcon from './cool-cat.png';
 
 const messages = defineMessages({
     message1: {
-        defaultMessage: 'Don\'t worry, we\'re on it {emoji}',
+        defaultMessage: 'Don\'t worry, we\'re on it',
         description: 'One of the "coming soon" random messages for yet-to-be-done features',
         id: 'gui.comingSoon.message1'
     },
@@ -22,7 +22,7 @@ const messages = defineMessages({
         id: 'gui.comingSoon.message2'
     },
     message3: {
-        defaultMessage: 'We\'re working on it {emoji}',
+        defaultMessage: 'We\'re working on it',
         description: 'One of the "coming soon" random messages for yet-to-be-done features',
         id: 'gui.comingSoon.message3'
     }
@@ -57,11 +57,9 @@ class ComingSoonContent extends React.Component {
                 {...messages[`message${messageNumber}`]}
                 values={{
                     emoji: (
-                        <img
-                            className={styles.comingSoonImage}
-                            src={images[imageNumber]}
-                            draggable={false}
-                        />
+                        // We shouldn't be using the cat images since they are trademarks of Scratch
+                        // so how about an emoticon instead?
+                        <span>:)</span>
                     )
                 }}
             />

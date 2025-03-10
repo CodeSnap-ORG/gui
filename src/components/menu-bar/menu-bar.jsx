@@ -107,6 +107,8 @@ import SeeInsideButton from './tw-see-inside.jsx';
 import {notScratchDesktop} from '../../lib/isScratchDesktop.js';
 import {APP_NAME} from '../../lib/brand.js';
 
+import ampmodIcon from './ampmod.svg';
+
 const ariaMessages = defineMessages({
     tutorials: {
         id: 'gui.menuBar.tutorialsLibrary',
@@ -543,6 +545,17 @@ class MenuBar extends React.Component {
                                 </MenuBarMenu>
                             </MenuLabel>
                         </div>}
+                        <a
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            href="/"
+                        >
+                            <img
+                                src={ampmodIcon}
+                                draggable={false}
+                                height={32}
+                                alt="AmpMod"
+                            />
+                        </a>
                         {(this.props.canChangeTheme || this.props.canChangeLanguage) && (<SettingsMenu
                             canChangeLanguage={this.props.canChangeLanguage}
                             canChangeTheme={this.props.canChangeTheme}
@@ -897,26 +910,6 @@ class MenuBar extends React.Component {
                                         defaultMessage="Addons"
                                         description="Button to open addon settings"
                                         id="tw.menuBar.addons"
-                                    />
-                                </span>
-                            </div>
-                        )}
-                        {this.props.onClickSettingsModal && (
-                            <div
-                                className={classNames(styles.menuBarItem, styles.hoverable)}
-                                onClick={this.props.onClickSettingsModal}
-                            >
-                                <img
-                                    src={advancedIcon}
-                                    draggable={false}
-                                    width={20}
-                                    height={20}
-                                />
-                                <span className={styles.collapsibleLabel}>
-                                    <FormattedMessage
-                                        defaultMessage="Advanced"
-                                        description="Button to open advanced settings menu"
-                                        id="tw.menuBar.advanced"
                                     />
                                 </span>
                             </div>

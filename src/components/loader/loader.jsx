@@ -45,8 +45,25 @@ const messages = defineMessages({
     }
 });
 
-// Because progress events are fired so often during the very performance-critical loading
-// process and React updates are very slow, we bypass React for updating the progress bar.
+const funFacts = [
+    'Fun fact: AmpMod is currently loading.',
+    'Did you know? In AmpMod, you can put variables inside of boolean inputs.',
+    'Tip: You can use the "backpack" to store and reuse code snippets.',
+    'Did you know? You can change the stage size in AmpMod.',
+    'Fun Fact: AmpMod supports extensions for additional functionalities.',
+    'Tip: Use the "costumes" tab to change how your sprites look.',
+    'AmpMod was previously known as UltiBlocks.',
+    'I LOVE LIBREKITTEN!',
+    'YOU can contribute to AmpMod!',
+    'Skibidi dop dop dop yes yes',
+    'Fun fact: Amp stands for A-MARIO-PLAYER',
+    'Funding for AmpMod is provided by apple cats like you. Thank you!',
+    'There was an error loading AmpMod. Please give 100 more energy units to AmpElectrecuted',
+    'Sadly, this fact was eaten by an evil kumquat.',
+    'qwertyuiopasdfghjklzxcvbnm',
+    'There is an AmpMod wiki on Miraheze',
+    'The Witch sprite was originally going to be the AmpMod mascot'
+];
 
 class LoaderComponent extends React.Component {
     constructor (props) {
@@ -55,11 +72,16 @@ class LoaderComponent extends React.Component {
             'handleAssetProgress',
             'handleProjectLoaded',
             'barInnerRef',
-            'messageRef'
+            'messageRef',
+            'funFactRef',
+            'updateFunFact'
         ]);
         this.barInnerEl = null;
         this.messageEl = null;
+        this.funFactEl = null;
         this.ignoreProgress = false;
+        this.funFactInterval = null;
+        this.lastFunFactIndex = -1;
     }
     componentDidMount () {
         this.handleAssetProgress(
@@ -68,10 +90,28 @@ class LoaderComponent extends React.Component {
         );
         this.props.vm.on('ASSET_PROGRESS', this.handleAssetProgress);
         this.props.vm.runtime.on('PROJECT_LOADED', this.handleProjectLoaded);
+        this.updateFunFact();
+        this.funFactInterval = setInterval(this.updateFunFact, 3000);
     }
     componentWillUnmount () {
         this.props.vm.off('ASSET_PROGRESS', this.handleAssetProgress);
         this.props.vm.runtime.off('PROJECT_LOADED', this.handleProjectLoaded);
+        clearInterval(this.funFactInterval);
+    }
+    updateFunFact () {
+        if (this.funFactEl) {
+            this.funFactEl.classList.remove(styles.funFactSlideIn);
+            void this.funFactEl.offsetWidth; // Trigger reflow
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * funFacts.length);
+            } while (randomIndex === this.lastFunFactIndex);
+            this.lastFunFactIndex = randomIndex;
+            const randomFact = funFacts[randomIndex];
+            this.funFactEl.textContent = randomFact;
+            this.funFactEl.classList.add(styles.funFactSlideIn);
+            this.funFactEl.classList.add(styles.funFactRoulette);
+        }
     }
     handleAssetProgress (finished, total) {
         if (this.ignoreProgress || !this.barInnerEl || !this.messageEl) {
@@ -105,48 +145,61 @@ class LoaderComponent extends React.Component {
     messageRef (message) {
         this.messageEl = message;
     }
+    funFactRef (funFact) {
+        this.funFactEl = funFact;
+    }
     render () {
         return (
             <div
-                className={classNames(styles.background, {
-                    [styles.fullscreen]: this.props.isFullScreen
-                })}
+            className={classNames(styles.background, {
+                [styles.fullscreen]: this.props.isFullScreen
+            })}
             >
-                <div className={styles.container}>
-                    <div className={styles.blockAnimation}>
-                        <img
-                            className={styles.topBlock}
-                            src={topBlock}
-                            draggable={false}
-                        />
-                        <img
-                            className={styles.middleBlock}
-                            src={middleBlock}
-                            draggable={false}
-                        />
-                        <img
-                            className={styles.bottomBlock}
-                            src={bottomBlock}
-                            draggable={false}
-                        />
-                    </div>
+            
+            <div className={styles.container}>
+                {/* <div className={styles.blockAnimation}>
+                <img
+                    className={styles.topBlock}
+                    src={topBlock}
+                    draggable={false}
+                />
+                <img
+                    className={styles.middleBlock}
+                    src={middleBlock}
+                    draggable={false}
+                />
+                <img
+                    className={styles.bottomBlock}
+                    src={bottomBlock}
+                    draggable={false}
+                />
+                </div> */}
 
-                    <div className={styles.title}>
-                        {mainMessages[this.props.messageId]}
-                    </div>
-
-                    <div
-                        className={styles.message}
-                        ref={this.messageRef}
-                    />
-
-                    <div className={styles.barOuter}>
-                        <div
-                            className={styles.barInner}
-                            ref={this.barInnerRef}
-                        />
-                    </div>
+                <div className={styles.customSpinner}>
+                    <div className={styles.spinnerCircle}></div>
                 </div>
+
+                <div className={styles.title}>
+                {mainMessages[this.props.messageId]}
+                </div>
+
+                <div
+                className={styles.message}
+                ref={this.messageRef}
+                />
+
+                <div className={styles.barOuter}>
+                <div
+                    className={styles.barInner}
+                    ref={this.barInnerRef}
+                />
+                </div>
+
+                <div
+                className={styles.funFact}
+                ref={this.funFactRef}
+                />
+            </div>
             </div>
         );
     }
