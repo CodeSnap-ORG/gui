@@ -22,12 +22,12 @@ const Home = () => (
             <h1 className={styles.headerText}>
                 {APP_NAME} - The definitive Scratch mod
             </h1>
-            <p>AmpMod combines features from other Scratch modifications and adds convenient features.</p>
+            <p>{APP_NAME} combines features from other Scratch modifications and adds convenient features.</p>
             <a href="/editor.html" className={homeStyles.primaryButton}>
                 Try now!
             </a>
         </header>
-        <section>
+        {/* <section>
             <div className={homeStyles.notification}>
                 <h2>Contribute to AmpMod!</h2>
                 <p>
@@ -35,19 +35,19 @@ const Home = () => (
                     Even if you don't know JavaScript, your help is appreciated!
                 </p>
             </div>
-        </section>
+        </section> */}
         <main className={`${styles.main} ${homeStyles.center}`}>
             <section>
-                <h2>What is AmpMod?</h2>
+                <h2>What is {APP_NAME}?</h2>
                 <p>
-                    AmpMod is a Scratch modification that combines features from other Scratch modifications.
+                    {APP_NAME} is a Scratch modification that combines features from other Scratch modifications.
                     It also adds convenient features to make complex projects easily.
                 </p>
             </section>
             <section>
-                <h2>It's not just Scratch, it's AmpMod!</h2>
+                <h2>It's not just Scratch, it's {APP_NAME}!</h2>
                 <p>
-                    AmpMod is designed to be a convenient package of features to make complex projects easily.
+                    {APP_NAME} is designed to be a convenient package of features to make complex projects easily.
                     From clicker games to scientific experiments, we have it all.
                 </p>
             </section>
@@ -59,8 +59,9 @@ const Home = () => (
             </section>
             <section>
                 <h2>Need help?</h2>
+                {/* If you are modifying AmpMod, you should replace or remove these links */}
                 <a href="https://scratch.mit.edu/discuss/topic/806311" className={`${homeStyles.button} ${homeStyles.marginRight}`}>
-                    Visit the forum
+                    Visit the forum topic
                 </a>
                 <a href="https://ultiblocks.miraheze.org/wiki/Main_Page" className={homeStyles.button}>
                     Visit the wiki

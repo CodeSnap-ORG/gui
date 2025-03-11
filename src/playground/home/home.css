@@ -27,13 +27,14 @@ section {
     background-color: $motion-primary;
     color: white;
     border-radius: 8px;
-    padding: 16px;
+    padding: 8px 16px;
     text-decoration: none;
     display: inline-block;
+    font-weight: bold;
 }
 
-.center {
-    text-align: center;
+.button:hover {
+    background-color: $motion-tertiary;
 }
 
 .marginRight {
