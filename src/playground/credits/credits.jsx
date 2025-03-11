@@ -124,6 +124,11 @@ const Credits = () => (
                 </details>
             </section>
             <section>
+                <h2>Favicon</h2>
+                <p>
+                    The AmpMod favicon is from the <a href="https://gh.vercte.net/forumoji/">Forumoji</a> project by <a href="https://https://scratch.mit.edu/users/lolecksdeehaha/">lolecksdeehaha</a>.
+            </section>
+            <section>
                 <h2>Contributors</h2>
                 <UserList users={UserData.ubContributors} />
             </section>
