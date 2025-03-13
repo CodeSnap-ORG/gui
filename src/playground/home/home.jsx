@@ -23,7 +23,7 @@ const Home = () => (
                 {APP_NAME} - The definitive Scratch mod
             </h1>
             <p>{APP_NAME} combines features from other Scratch modifications and adds convenient features.</p>
-            <a href="/editor.html" className={homeStyles.primaryButton}>
+            <a href="editor.html" className={homeStyles.primaryButton}>
                 Try now!
             </a>
         </header>
@@ -53,7 +53,7 @@ const Home = () => (
             </section>
             <section>
                 <h2>{APP_NAME} is licenced under the GPL v3</h2>
-                <a href="/LICENSE.txt" className={homeStyles.button}>
+                <a href="LICENSE.txt" className={homeStyles.button}>
                     View the licence
                 </a>
             </section>
