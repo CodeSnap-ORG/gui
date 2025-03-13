@@ -101,7 +101,7 @@ export default async function ({ addon, console, msg }) {
   };
 
   const oldFieldDropdownGetOptions = Blockly.FieldDropdown.prototype.getOptions;
-  Blockly.FieldDropdown.prototype.getOptions = function () {
+  Blockly.FieldDropdown.prototype.getOptions = Blockly.FieldTextDropdown.prototype.getOptions = function () {
     const options = oldFieldDropdownGetOptions.call(this);
     const block = this.sourceBlock_;
     const isStage = vm.editingTarget && vm.editingTarget.isStage;
