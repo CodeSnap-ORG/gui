@@ -91,7 +91,7 @@
     "redux": "3.7.2",
     "redux-throttle": "0.1.1",
     "scratch-audio": "github:TurboWarp/scratch-audio#develop",
-    "scratch-blocks": "git+https://codeberg.org/AmpMod/scratch-blocks.git#develop",
+    "scratch-blocks": "github:AmpM0d/scratch-blocks.git#developBuilds",
     "scratch-paint": "github:TurboWarp/scratch-paint#develop",
     "scratch-render": "github:TurboWarp/scratch-render#develop",
     "scratch-vm": "git+https://codeberg.org/AmpMod/scratch-vm.git#develop",
