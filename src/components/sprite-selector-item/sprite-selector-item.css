@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
@@ -9,7 +9,7 @@
     justify-content: flex-start;
     position: relative;
 
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
     color: $text-primary;
     border-width: 2px;
@@ -70,7 +70,7 @@
     font-size: 0.625rem;
     color: $text-primary;
     user-select: none;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .sprite-name, .sprite-details {

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/z-index.css";
@@ -19,14 +18,14 @@ can set a width for example or what it should do in a flex box (eg. grow).
     -webkit-background-clip: padding-box;
     height: auto;
     padding: .5rem;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .title-field {
     color: $menu-bar-foreground;
     font-weight: bold;
     font-size: .8rem;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .title-field::placeholder {

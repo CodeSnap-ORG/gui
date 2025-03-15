@@ -52,6 +52,9 @@ import returnIcon from './custom/return.svg';
 import galleryIcon from './gallery/gallery.svg';
 import {APP_NAME} from '../../brand';
 
+//import listIconURL from './list/list.png';
+//import listInsetIconURL from './list/list-small.svg';
+
 export default [
     {
         name: (
@@ -358,6 +361,25 @@ export default [
         incompatibleWithScratch: true,
         featured: true
     }, */
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Legacy Lists"
+                description="Name for the 'Legacy Lists' extension"
+                id="gui.extension.legacyLists.name"
+            />
+        ),
+        extensionId: 'data_enable_lists',
+        description: (
+            <FormattedMessage
+                defaultMessage="Use the vanilla list system. Note that the Arrays blocks are more flexible and should be used instead if possible."
+                description="Description for the 'Legacy Lists' extension"
+                id="gui.extension.legacyLists.description"
+            />
+        ),
+        tags: ['scratch'],
+        featured: true
+    },
     {
         name: (
             <FormattedMessage

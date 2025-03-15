@@ -1,9 +1,6 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/z-index.css";
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 @keyframes zoomFadeIn {
     0% {
@@ -82,6 +79,7 @@
     color: $ui-modal-foreground;
     transition: background-color 0.3s ease-out;
     animation: fadeIn 0.3s ease-out; /* Apply fade-in animation */
+    backdrop-filter: blur(2px);
 }
 
 .modal-overlay.full-screen {
@@ -104,7 +102,7 @@
     border-radius: 1em;
     user-select: none;
 
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow: hidden;
     animation: zoomFadeIn 0.3s ease-out;
 }
@@ -189,13 +187,16 @@ $sides: 20rem;
 .header-item-title {
     flex-grow: 1;
     flex-shrink: 0;
-    justify-content: center;
     user-select: none;
     letter-spacing: 0.4px;
     cursor: default;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 1.2rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
     font-weight: bold; /* Changed to bold */
+}
+
+.modal-content.full-screen .header-item-title {
+    justify-content: center;
 }
 
 [dir="ltr"] .header-item-title {

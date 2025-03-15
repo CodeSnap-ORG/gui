@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cantarell&display=swap');
 @import "../../css/colors.css";
 @import "../../css/units.css";
 @import "../../css/z-index.css";
@@ -19,7 +18,6 @@ $more-button-size: 2.25rem;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-family: 'Cantarell', sans-serif;
     background: $looks-secondary;
     outline: none;
     border: none;

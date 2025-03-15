@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
@@ -10,7 +9,7 @@
     opacity: 0.5;
     background-color: transparent;
     color: inherit;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .input:focus {
     opacity: 1;
@@ -24,7 +23,7 @@
     background-color: $extensions-primary !important;
     border: 1px solid $ui-black-transparent !important;
     box-shadow: 0 0 .5rem $shadow !important;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     z-index: $z-index-menu-bar !important;
 }
 

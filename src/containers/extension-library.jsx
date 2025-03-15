@@ -139,6 +139,12 @@ class ExtensionLibrary extends React.PureComponent {
             return;
         }
 
+        if (extensionId === 'data_enable_lists') {
+            this.props.onEnableLegacyLists();
+            this.props.onCategorySelected('variables');
+            return;
+        }
+
         const url = item.extensionURL ? item.extensionURL : extensionId;
         if (!item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
@@ -196,6 +202,7 @@ ExtensionLibrary.propTypes = {
     intl: intlShape.isRequired,
     onCategorySelected: PropTypes.func,
     onEnableProcedureReturns: PropTypes.func,
+    onEnableLegacyLists: PropTypes.func,
     onOpenCustomExtensionModal: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,

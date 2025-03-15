@@ -6,6 +6,7 @@ import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-int
 
 import booleanInputIcon from './icon--boolean-input.svg';
 import textInputIcon from './icon--text-input.svg';
+import squareTextIcon from './icon--square-text-input.svg';
 import labelIcon from './icon--label.svg';
 
 import styles from './custom-procedures.css';
@@ -30,12 +31,39 @@ const CustomProcedures = props => (
             componentRef={props.componentRef}
         />
         <Box className={styles.body}>
+            <h3>Add an input</h3>
             <div className={styles.optionsRow}>
                 <div
                     className={styles.optionCard}
                     role="button"
                     tabIndex="0"
                     onClick={props.onAddTextNumber}
+                >
+                    <img
+                        className={styles.optionIcon}
+                        src={squareTextIcon}
+                        draggable={false}
+                    />
+                    <div className={styles.optionTitle}>
+                        <FormattedMessage
+                            defaultMessage="Add an input"
+                            description="Label for button to add a number/text input"
+                            id="gui.customProcedures.addAnInputNumberText"
+                        />
+                    </div>
+                    <div className={styles.optionDescription}>
+                        <FormattedMessage
+                            defaultMessage="number or text"
+                            description="Description of the number/text input type"
+                            id="gui.customProcedures.numberTextType"
+                        />
+                    </div>
+                </div>
+                <div
+                    className={styles.optionCard}
+                    role="button"
+                    tabIndex="0"
+                    onClick={props.onAddNumber}
                 >
                     <img
                         className={styles.optionIcon}
@@ -51,9 +79,9 @@ const CustomProcedures = props => (
                     </div>
                     <div className={styles.optionDescription}>
                         <FormattedMessage
-                            defaultMessage="number or text"
-                            description="Description of the number/text input type"
-                            id="gui.customProcedures.numberTextType"
+                            defaultMessage="number only"
+                            description="Description of the number input type"
+                            id="gui.customProcedures.numberType"
                         />
                     </div>
                 </div>
@@ -149,6 +177,7 @@ CustomProcedures.propTypes = {
     onAddBoolean: PropTypes.func.isRequired,
     onAddLabel: PropTypes.func.isRequired,
     onAddTextNumber: PropTypes.func.isRequired,
+    onAddNumber: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     onToggleWarp: PropTypes.func.isRequired,

@@ -16,7 +16,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
         <div className={styles.listHeader}>
             {label}
         </div>
-        <div className={styles.listBody}>
+        <div className={styles.listBody, 'no-drag'}>
             <ListMonitorScroller
                 draggable={draggable}
                 height={height}

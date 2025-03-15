@@ -16,6 +16,11 @@ const messages = defineMessages({
         description: 'Label for the y position monitor when shown on the stage',
         id: 'gui.opcodeLabels.yposition'
     },
+    motion_position: {
+        defaultMessage: 'position',
+        description: 'Label for the position monitor when shown on the stage',
+        id: 'gui.opcodeLabels.position'
+    },
 
     // Looks
     looks_size: {

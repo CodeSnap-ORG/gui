@@ -164,7 +164,7 @@ const CustomFPS = props => (
         help={
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="Runs scripts 60 times per second instead of 30. Most projects will not work properly with this enabled. You should try Interpolation with 60 FPS mode disabled if that is the case. {customFramerate}."
+                defaultMessage="Runs scripts 60 times per second instead of 30. Most vanilla Scratch projects will not handle this properly; you can try Interpolation instead. {customFramerate}."
                 description="FPS setting help"
                 id="tw.settingsModal.fpsHelp"
                 values={{
@@ -205,7 +205,7 @@ const Interpolation = props => (
         help={
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="Makes projects appear smoother by interpolating sprite motion. Interpolation should not be used on 3D projects, raytracers, pen projects, and laggy projects as interpolation will make them run slower without making them appear smoother."
+                defaultMessage="Makes projects appear smoother by interpolating sprite motion. For AmpMod projects, you should use Custom FPS instead."
                 description="Interpolation setting help"
                 id="tw.settingsModal.interpolationHelp"
             />
@@ -378,7 +378,7 @@ const CustomStageSize = ({
         help={(
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="Changes the size of the Scratch stage from 480x360 to something else. Try 640x360 to make the stage widescreen. Very few projects will handle this properly."
+                defaultMessage="Changes the size of the stage from 480x360 to something else. Try 640x360 to make the stage widescreen. Very few vanilla Scratch projects will handle this properly."
                 description="Custom Stage Size option"
                 id="tw.settingsModal.customStageSizeHelp"
             />
@@ -407,14 +407,6 @@ const StoreProjectOptions = ({onStoreProjectOptions}) => (
                     id="tw.settingsModal.storeProjectOptions"
                 />
             </button>
-            <p>
-                <FormattedMessage
-                    // eslint-disable-next-line max-len
-                    defaultMessage="Stores the selected settings in the project so they will be automatically applied when TurboWarp loads this project. Warp timer and disable compiler will not be saved."
-                    description="Help text for the store settings in project button"
-                    id="tw.settingsModal.storeProjectOptionsHelp"
-                />
-            </p>
         </div>
     </div>
 );
@@ -447,14 +439,15 @@ const SettingsModalComponent = props => (
                     id="tw.settingsModal.featured"
                 />
             </Header>
+            {!props.isEmbedded && (
+                <CustomStageSize
+                    {...props}
+                />
+            )}
             <CustomFPS
                 framerate={props.framerate}
                 onChange={props.onFramerateChange}
                 onCustomizeFramerate={props.onCustomizeFramerate}
-            />
-            <Interpolation
-                value={props.interpolation}
-                onChange={props.onInterpolationChange}
             />
             <HighQualityPen
                 value={props.highQualityPen}
@@ -490,11 +483,10 @@ const SettingsModalComponent = props => (
                     id="tw.settingsModal.dangerZone"
                 />
             </Header>
-            {!props.isEmbedded && (
-                <CustomStageSize
-                    {...props}
-                />
-            )}
+            <Interpolation
+                value={props.interpolation}
+                onChange={props.onInterpolationChange}
+            />
             <DisableCompiler
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}

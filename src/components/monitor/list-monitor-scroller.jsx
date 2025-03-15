@@ -31,6 +31,9 @@ class ListMonitorScroller extends React.Component {
         );
     }
     rowRenderer ({index, key, style}) {
+        const value = this.props.values[index];
+        const isNestedList = Array.isArray(value);
+
         return (
             <div
                 className={styles.listRow}
@@ -52,15 +55,16 @@ class ListMonitorScroller extends React.Component {
                             <input
                                 autoFocus
                                 autoComplete={false}
-                                className={classNames(styles.listInput, 'no-drag')}
+                                className={classNames(styles.listInput, 'no-drag', isNestedList ? styles.nestedListInput : null)}
                                 spellCheck={false}
                                 style={{color: this.props.categoryColor.text}}
                                 type="text"
-                                value={this.props.activeValue}
+                                value={isNestedList ? "nested array" : this.props.activeValue}
                                 onBlur={this.props.onDeactivate}
                                 onChange={this.props.onInput}
                                 onFocus={this.props.onFocus}
                                 onKeyDown={this.props.onKeyPress} // key down to get ahead of blur
+                                readOnly={isNestedList}
                             />
                             <div
                                 className={styles.removeButton}
@@ -71,7 +75,9 @@ class ListMonitorScroller extends React.Component {
                         </div>
 
                     ) : (
-                        <div className={styles.valueInner}>{this.props.values[index]}</div>
+                        <div className={styles.valueInner}>
+                            {isNestedList ? <i>nested array</i> : value}
+                        </div>
                     )}
                 </div>
             </div>
@@ -115,7 +121,8 @@ ListMonitorScroller.propTypes = {
     onRemove: PropTypes.func,
     values: PropTypes.arrayOf(PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.number
+        PropTypes.number,
+        PropTypes.array // Added support for arrays
     ])),
     width: PropTypes.number
 };

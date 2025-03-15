@@ -360,9 +360,16 @@ class Interface extends React.Component {
                                 </div>
                             ) : null}
                             <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
+                                <h3>
+                                    <FormattedMessage
+                                        defaultMessage="Heads up!"
+                                        description="Notice header"
+                                        id="tw.development.noticeHeader"
+                                    />
+                                </h3>
                                 <p>
                                     <FormattedMessage
-                                        defaultMessage="AmpMod is in active development and things will change very often. For updates, visit {link}."
+                                        defaultMessage="AmpMod is in its alpha stages. Please expect to notice radical changes. Compatibility with Scratch may be dropped in the near future. We may add a compatibility mode but do not get your hopes up. For updates, visit {link}."
                                         description="Notice about active development"
                                         id="tw.development.notice"
                                         values={{
@@ -383,9 +390,9 @@ class Interface extends React.Component {
                                 <p>
                                     <FormattedMessage
                                         // eslint-disable-next-line max-len
-                                        defaultMessage="{APP_NAME} combines features from other Scratch modifications to give you the best Scratch programming interface you could imagine. We take features from other Scratch modifications, and put them into a single convenient package. AmpMod is developed by people like you - check the credits page to see who has contributed."
-                                        description="Description of TurboWarp on the homepage"
-                                        id="tw.home.description"
+                                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
+                                        description="Description of AmpMod on the homepage"
+                                        id="tw.home.ampdescription"
                                         values={{
                                             APP_NAME
                                         }}

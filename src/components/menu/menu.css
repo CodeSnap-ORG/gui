@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @import "../../css/colors.css";
 
 .menu {
@@ -11,7 +11,7 @@
     min-width: 186px;
     overflow: visible;
     box-shadow: 0 8px 8px 0 $shadow;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .menu.left {
@@ -31,7 +31,7 @@
     margin: 0;
     font-weight: bold;
     position: relative;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .menu-item.active,

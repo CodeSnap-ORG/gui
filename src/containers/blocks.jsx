@@ -122,7 +122,8 @@ class Blocks extends React.Component {
             'onWorkspaceMetricsChange',
             'setBlocks',
             'setLocale',
-            'handleEnableProcedureReturns'
+            'handleEnableProcedureReturns',
+            'handleEnableLegacyLists'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
@@ -662,6 +663,10 @@ class Blocks extends React.Component {
         this.workspace.enableProcedureReturns();
         this.requestToolboxUpdate();
     }
+    handleEnableLegacyLists () {
+        this.workspace.enableLegacyLists();
+        this.requestToolboxUpdate();
+    }
     render () {
         /* eslint-disable no-unused-vars */
         const {
@@ -717,6 +722,7 @@ class Blocks extends React.Component {
                         vm={vm}
                         onCategorySelected={this.handleCategorySelected}
                         onEnableProcedureReturns={this.handleEnableProcedureReturns}
+                        onEnableLegacyLists={this.handleEnableLegacyLists}
                         onRequestClose={onRequestCloseExtensionLibrary}
                         onOpenCustomExtensionModal={onOpenCustomExtensionModal || reduxOnOpenCustomExtensionModal}
                     />
@@ -786,7 +792,7 @@ Blocks.defaultOptions = {
     },
     grid: {
         spacing: 40,
-        length: 2,
+        length: 40,
         colour: '#ddd'
     },
     comments: true,

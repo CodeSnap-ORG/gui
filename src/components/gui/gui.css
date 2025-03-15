@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @import "../../css/units.css";
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
 .page-wrapper {
     height: 100%;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .body-wrapper {
@@ -63,7 +63,7 @@
     align-items: flex-end;
     flex-shrink: 0;
 
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 0.80rem;
 
@@ -97,7 +97,7 @@
     white-space: nowrap;
     transition: background-color 0.2s, color 0.2s, height 0.2s;
 
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 

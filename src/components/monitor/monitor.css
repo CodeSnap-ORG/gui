@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cantarell&display=swap');
 @import "../../css/units.css";
 @import "../../css/default-colors.css";
 @import "../../css/z-index.css";
@@ -9,7 +8,7 @@
     z-index: $z-index-monitor;
     border: 1px solid $ui-black-transparent-default;
     border-radius: calc($space / 2);
-    font-family: 'Cantarell', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.75rem;
     transition: box-shadow 0.2s;
     pointer-events: all;
@@ -28,13 +27,15 @@
 .default-monitor {
     display: flex;
     flex-direction: column;
-    padding: 3px;
+    padding: 0.1rem;
+    align-items: center;
 }
 
 .label {
     font-weight: bold;
     text-align: center;
     margin: 0 5px;
+    align-self: center;
 }
 
 .value {
@@ -44,8 +45,8 @@
     min-width: 40px;
     text-align: center;
     margin: 0 5px;
-    border-radius: calc($space / 2);
-    padding: 0 2px;
+    border-radius: 1rem;
+    padding: 0.2rem 0.45rem;
     white-space: pre-wrap;
     transform: translateZ(0); /* Fixes flickering in Safari */
 }
@@ -186,4 +187,8 @@
 
 .footer-length {
     text-align: center;
+}
+
+.nested-list-input {
+    font-style: italic;
 }

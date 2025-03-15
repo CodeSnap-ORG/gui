@@ -20,14 +20,14 @@ const manifest = {
       "name": "Separate List Category",
       "id": "separateListCategory",
       "type": "boolean",
-      "default": true
+      "default": false
     },
     {
       "dynamic": true,
       "name": "Separate Sprite-only Variables",
       "id": "separateLocalVariables",
       "type": "boolean",
-      "default": false
+      "default": true
     },
     {
       "dynamic": true,

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
@@ -13,7 +13,7 @@
     max-width: 160px;
     margin: $space;
     padding: 1rem 1rem 0 1rem;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: $text-primary;
     background: $ui-white;
     border-width: 2px;

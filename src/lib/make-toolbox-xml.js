@@ -142,7 +142,8 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
         ${blockSeparator}
         <block id="${targetId}_xposition" type="motion_xposition"/>
         <block id="${targetId}_yposition" type="motion_yposition"/>
-        <block id="${targetId}_direction" type="motion_direction"/>`}
+        <block id="${targetId}_direction" type="motion_direction"/>
+        <block id="${targetId}_position" type="motion_position"/>`}
         ${categorySeparator}
     </category>
     `;
@@ -757,6 +758,94 @@ const variables = function (isInitialSetup, isStage, targetId, colors) {
     `;
 };
 
+const arrays = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
+    return `
+    <category
+        name="Arrays"
+        id="arrays"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
+        <block type="arrays_empty_array" />
+        ${blockSeparator}
+        <block type="arrays_delimited_to_array">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">apple,banana</field>
+                </shadow>
+            </value>
+            <value name="DELIM">
+                <shadow type="text">
+                    <field name="TEXT">,</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_range">
+            <value name="START">
+                <shadow type="math_whole_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="END">
+                <shadow type="math_whole_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="arrays_item_of">
+            <value name="INDEX">
+                <shadow type="data_listindexrandom">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_item_no_of">
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">item</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_contains">
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">item</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_length" />
+        ${blockSeparator}
+        <block type="arrays_in_front_of">
+            <value name="ITEM">
+                <shadow type="text">
+                    <field name="TEXT">item</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_behind">
+            <value name="ITEM">
+                <shadow type="text">
+                    <field name="TEXT">item</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="arrays_at">
+            <value name="ITEM">
+                <shadow type="text">
+                    <field name="TEXT">item</field>
+                </shadow>
+            </value>
+            <value name="INDEX">
+                <shadow type="data_listindexrandom">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+};
+
 const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
@@ -823,6 +912,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const sensingXML = moveCategory('sensing') || sensing(isInitialSetup, isStage, targetId, colors.sensing);
     const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId, colors.operators);
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data);
+    const arraysXML = moveCategory('arrays') || arrays(isInitialSetup, isStage, targetId, colors.data_lists);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more);
 
     // Always display TurboWarp blocks as the first extension, if it exists,
@@ -842,6 +932,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
+        arraysXML, gap,
         myBlocksXML
     ];
 

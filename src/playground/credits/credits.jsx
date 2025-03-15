@@ -120,6 +120,7 @@ const Credits = () => (
                     <summary>Modifications AmpMod is based on</summary>
                     <ul>
                         <li><a href="https://librekitten.org">LibreKitten</a> (home page header)</li>
+                        <li>Can't mention this one (hint: Antarctic species) (case blocks)</li>
                     </ul>
                 </details>
             </section>

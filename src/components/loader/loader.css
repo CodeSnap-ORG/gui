@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 @import "../../css/default-colors.css";
@@ -13,12 +13,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: $menu-bar-background;
     text-align: center;
     color: white;
     border-radius: 10px; /* Make the loader round */
     overflow: hidden; /* Ensure content stays within the round shape */
+    cursor: progress;
 }
 
 .fullscreen {
