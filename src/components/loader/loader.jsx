@@ -62,8 +62,13 @@ const funFacts = [
     'Sadly, this fact was eaten by an evil kumquat.',
     'qwertyuiopasdfghjklzxcvbnm',
     'There is an AmpMod wiki on Miraheze',
-    'The Witch sprite was originally going to be the AmpMod mascot'
-];
+    'The Witch sprite was originally going to be the AmpMod mascot',
+    "'How to make computer in AmpMod' Oh wait, this isn't Google, is it?",
+    "The person who typed this fact is going clinically insane!",
+    "You said to press ANYTHING while doing a keyboard smash! What do you mean 7 is wrong?!",
+    "Fun fact: We are cool",
+    "How to AmpMod 101: Step 1: AmpMod."
+    ];
 
 class LoaderComponent extends React.Component {
     constructor (props) {
