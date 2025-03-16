@@ -359,6 +359,44 @@ class Interface extends React.Component {
                                     />
                                 </div>
                             ) : null}
+                            <div className={styles.section}>
+                                <p>
+                                    <FormattedMessage
+                                        // eslint-disable-next-line max-len
+                                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
+                                        description="Description of AmpMod on the homepage"
+                                        id="tw.home.ampdescription"
+                                        values={{
+                                            APP_NAME
+                                        }}
+                                    />
+                                </p>
+                            </div>
+                            <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
+                                <p>
+                                    <FormattedMessage
+                                        defaultMessage="Unfortunately, I ({mention}, lead developer of AmpMod) have been permanently banned from using Scratch. I will continue to work on AmpMod and have sent an appeal to the Scratch Team, but I will not be active on Scratch. For more information, please read {link}, and if anyone tries to contact me on Scratch, please link them there."
+                                        description="Notice about AmpElectrecuted being banned"
+                                        id="tw.banned.notice"
+                                        values={{
+                                            mention: (
+                                                <a href="https://scratch.mit.edu/users/AmpElectrecuted" target="_blank" rel="noopener noreferrer">
+                                                    {'@AmpElectrecuted'}
+                                                </a>
+                                            ),
+                                            link: (
+                                                <a
+                                                    href="https://ultiblocks.miraheze.org/wiki/User:AmpElectrecuted#Banned"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {'https://ultiblocks.miraheze.org/wiki/User:AmpElectrecuted'}
+                                                </a>
+                                            )
+                                        }}
+                                    />
+                                </p>
+                            </div>
                             <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
                                 <h3>
                                     <FormattedMessage
@@ -382,19 +420,6 @@ class Interface extends React.Component {
                                                     {'https://scratch.mit.edu/discuss/topic/806311'}
                                                 </a>
                                             )
-                                        }}
-                                    />
-                                </p>
-                            </div>
-                            <div className={styles.section}>
-                                <p>
-                                    <FormattedMessage
-                                        // eslint-disable-next-line max-len
-                                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
-                                        description="Description of AmpMod on the homepage"
-                                        id="tw.home.ampdescription"
-                                        values={{
-                                            APP_NAME
                                         }}
                                     />
                                 </p>
