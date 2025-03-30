@@ -21,14 +21,7 @@ const ClippyComponent = () => {
     const timer = setTimeout(() => {
       setIsVisible(true);
       const tipInterval = setInterval(() => {
-        // Generate a new tip with a fresh cat image URL
-        const newTipIndex = Math.floor(Math.random() * tips.length);
-        if (tips[newTipIndex].includes('<img src=')) {
-          const newCatTip = tips[newTipIndex].replace('https://cataas.com/cat', `https://cataas.com/cat?nocache=${Date.now()}`);
-          setTip(newCatTip);
-        } else {
-          setTip(tips[newTipIndex]);
-        }
+        setTip(tips[newTipIndex]);
       }, 5000); // Change tip every 5 seconds
 
       return () => clearInterval(tipInterval); // Cleanup interval on unmount
