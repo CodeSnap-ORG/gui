@@ -108,6 +108,7 @@ import {notScratchDesktop} from '../../lib/isScratchDesktop.js';
 import {APP_NAME} from '../../lib/brand.js';
 
 import ampmodIcon from './ampmod.svg';
+import lampmodIcon from './lampmod.svg';
 
 const ariaMessages = defineMessages({
     tutorials: {
@@ -482,6 +483,8 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
+        const today = new Date();
+        const isAprilFools = today.getMonth() === 3 && today.getDate() === 1;
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
         return (
@@ -550,7 +553,7 @@ class MenuBar extends React.Component {
                             href="/"
                         >
                             <img
-                                src={ampmodIcon}
+                                src={isAprilFools ? lampmodIcon : ampmodIcon}
                                 draggable={false}
                                 height={32}
                                 alt="AmpMod"

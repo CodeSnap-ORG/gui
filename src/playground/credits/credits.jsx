@@ -168,6 +168,12 @@ const Credits = () => (
                 </p>
             </section>
             <section>
+                <h2>Art</h2>
+                <p>
+                    Some images use content from <a href="https://openclipart.org">Openclipart</a>, licensed under the CC0 license. Even though the images are public domain, we would still like to attribute.
+                </p>
+            </section>
+            <section>
                 <h2>You</h2>
                 <p>
                     Most importantly, thank you for using {APP_NAME}, or at least trying it out. You're awesome!
