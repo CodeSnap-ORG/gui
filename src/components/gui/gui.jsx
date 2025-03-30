@@ -20,6 +20,7 @@ import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
+import Clippy from '../../containers/amp-clippy.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import BrowserModal from '../browser-modal/browser-modal.jsx';
@@ -164,6 +165,8 @@ const GUIComponent = props => {
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
+
+    const showClippy = () => new Date().getMonth() === 3 && new Date().getDate() === 1;
 
     const tabClassNames = {
         tabs: styles.tabs,
@@ -328,6 +331,7 @@ const GUIComponent = props => {
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
+                            {showClippy() ? ( <Clippy /> ) : null}
                             <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}

@@ -112,6 +112,15 @@ const base = {
                     }
                 }
             }]
+        },
+        {
+            test: /\.(svg|png|wav|mp3|gif|jpg|woff2|hex)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 8192, // Convert images < 8kb to base64 strings
+                outputPath: 'static/assets/',
+                esModule: false
+            }
         }]
     },
     plugins: [
@@ -154,19 +163,6 @@ module.exports = [
         },
         output: {
             path: path.resolve(__dirname, 'build')
-        },
-        module: {
-            rules: base.module.rules.concat([
-                {
-                    test: /\.(svg|png|wav|mp3|gif|jpg|woff2|hex)$/,
-                    loader: 'url-loader',
-                    options: {
-                        limit: 2048,
-                        outputPath: 'static/assets/',
-                        esModule: false
-                    }
-                }
-            ])
         },
         optimization: {
             splitChunks: {
@@ -253,7 +249,7 @@ module.exports = [
                 patterns: [
                     {
                         from: 'extensions/**',
-                        to: 'static',
+                         to: 'static',
                         context: 'src/examples'
                     }
                 ]

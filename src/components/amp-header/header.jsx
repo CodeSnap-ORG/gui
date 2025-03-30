@@ -7,7 +7,7 @@ import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
 import React from 'react';
 import Logo from './ampmod.svg';
-import FakeLogo from './lampmod.svg'; // Assuming this is your April Fools' logo
+import FakeLogo from './lampmod.svg';
 
 import Button from '../button/button.jsx';
 
@@ -17,7 +17,7 @@ import { APP_NAME } from '../../lib/brand.js';
 
 function isAprilFools() {
   const now = new Date();
-  const month = now.getMonth(); // 0-indexed (0 for January, 3 for April)
+  const month = now.getMonth();
   const day = now.getDate();
 
   return month === 3 && day === 1;
