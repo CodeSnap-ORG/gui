@@ -13,6 +13,7 @@ import Spinner from '../spinner/spinner.jsx';
 import Separator from '../tw-extension-separator/separator.jsx';
 import RemovedTrademarks from '../tw-removed-trademarks/removed-trademarks.jsx';
 import {APP_NAME} from '../../lib/brand.js';
+import Clippy from '../../containers/amp-clippy.jsx'; // ADDED THIS LINE
 
 import styles from './library.css';
 
@@ -248,6 +249,16 @@ class LibraryComponent extends React.Component {
     }
     render () {
         const filteredData = this.state.canDisplay && this.props.data && this.getFilteredData();
+        const getClippyMenu = () => {
+            if (this.props.id === 'extensionLibrary') {
+                return 'extLib';
+            } else if (this.props.id === 'costumeLibrary' || this.props.id === 'backdropLibrary') {
+                return 'costLib';
+            } else if (this.props.id === 'soundLibrary') {
+                return 'soundLib';
+            }
+            return 'extLib'; // Default
+        };
         return (
             <Modal
                 fullScreen
@@ -255,6 +266,7 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
+                <Clippy messageSet={getClippyMenu()} />
                 {(this.props.filterable || this.props.tags) && (
                     <div className={styles.filterBar}>
                         {this.props.filterable && (
