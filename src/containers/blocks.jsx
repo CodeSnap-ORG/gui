@@ -792,7 +792,7 @@ Blocks.defaultOptions = {
     },
     grid: {
         spacing: 40,
-        length: 40,
+        length: 2,
         colour: '#ddd'
     },
     comments: true,

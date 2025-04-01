@@ -1,3 +1,5 @@
+@import "../../css/colors.css";
+
 .clippy-container {
     position: absolute;
     bottom: 20px;
@@ -5,22 +7,28 @@
     z-index: 5;
     margin: 60px;
     margin-bottom: 150px;
+    pointer-events: none;
+}
+
+.clippy-fixed {
+    margin: none;
+    position: fixed;
 }
 
 .clippy-tip {
-    background-color: #f0f0f0; 
-    border: 1px solid #d3d3d3; 
-    padding: 8px 12px; 
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    padding: 8px 12px;
     margin-bottom: 0;
     margin-right: 5px;
-    border-radius: 10px; 
+    border-radius: 15px;
     max-width: 200px;
-    font-size: 1em; 
+    font-size: 1em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333; 
+    color: $text-primary;
     display: inline-block;
-    position: relative; 
-    overflow: hidden; 
+    position: relative; /* Ensure relative positioning for the pseudo-elements */
+    overflow: hidden;
 }
 
 .clippy-image {
@@ -28,4 +36,17 @@
     position: absolute;
     top: calc(100% + 5px);
     right: -10px;
+    pointer-events: all;
+}
+
+[dir="rtl"] .clippy-container {
+    left: 20px;
+}
+
+[dir="rtl"] .clippy-image {
+    right: 10px;
+}
+
+[dir="rtl"] #react-tabs-1 .clippy-container {
+    margin-right: 320px;
 }

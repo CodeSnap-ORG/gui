@@ -166,8 +166,6 @@ const GUIComponent = props => {
         return <Box {...componentProps}>{children}</Box>;
     }
 
-    const showClippy = () => new Date().getMonth() === 3 && new Date().getDate() === 1;
-
     const tabClassNames = {
         tabs: styles.tabs,
         tab: classNames(tabStyles.reactTabsTab, styles.tab),
@@ -331,7 +329,6 @@ const GUIComponent = props => {
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
-                            {showClippy() ? ( <Clippy /> ) : null}
                             <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}
@@ -421,14 +418,15 @@ const GUIComponent = props => {
                                     <Box className={styles.watermark}>
                                         <Watermark />
                                     </Box>
+                                    {blocksTabVisible ? <Clippy messageSet="codeMenu" /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
-                                    {costumesTabVisible ? <CostumeTab
+                                    {costumesTabVisible ? <><Clippy messageSet="costMenu" /><CostumeTab
                                         vm={vm}
-                                    /> : null}
+                                    /></> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
-                                    {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                    {soundsTabVisible ? <><Clippy messageSet="soundMenu" /> <SoundTab vm={vm} /></> : null}
                                 </TabPanel>
                             </Tabs>
                             {backpackVisible ? (

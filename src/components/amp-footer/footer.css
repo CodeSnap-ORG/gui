@@ -8,6 +8,11 @@
 .footer a {
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
+    color: $motion-primary;
+}
+.footer a.footer-reset-data {
+    color: $red-primary;
 }
 .footer-content {
     max-width: 600px;
@@ -31,4 +36,10 @@
 }
 .footer-section > * {
     margin-bottom: 10px;
+}
+
+.separator {
+    margin: 0 0.5em;
+    border-left: 1px solid $ui-black-transparent;
+    height: 1em;
 }

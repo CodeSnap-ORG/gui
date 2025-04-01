@@ -178,7 +178,8 @@ module.exports = [
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.ENABLE_SERVICE_WORKER': JSON.stringify(process.env.ENABLE_SERVICE_WORKER || ''),
                 'process.env.ROOT': JSON.stringify(root),
-                'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash')
+                'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash'),
+                'ampmod_version': JSON.stringify(process.env.npm_package_version) // Added this line
             }),
             new HtmlWebpackPlugin({
                 chunks: ['editor'],

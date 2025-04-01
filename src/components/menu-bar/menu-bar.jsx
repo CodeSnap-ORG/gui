@@ -1006,6 +1006,12 @@ class MenuBar extends React.Component {
                             />
                         ) : []))}
                     </div>
+                </div>
+
+                <div className={styles.accountInfoGroup}>
+                    <TWSaveStatus
+                        showSaveFilePicker={this.props.showSaveFilePicker}
+                    />
                     {/* tw: add a feedback button */}
                     <div className={styles.menuBarItem}>
                         <a
@@ -1027,12 +1033,6 @@ class MenuBar extends React.Component {
                             </Button>
                         </a>
                     </div>
-                </div>
-
-                <div className={styles.accountInfoGroup}>
-                    <TWSaveStatus
-                        showSaveFilePicker={this.props.showSaveFilePicker}
-                    />
                 </div>
 
                 {aboutButton}

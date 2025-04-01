@@ -9,6 +9,7 @@ import {detectTheme} from '../../lib/themes/themePersistance';
 
 import Header from '../../components/amp-header/header.jsx';
 import Footer from '../../components/amp-footer/footer.jsx';
+import Clippy from '../../containers/amp-clippy.jsx';
 
 /* eslint-disable react/jsx-no-literals */
 
@@ -18,6 +19,7 @@ document.documentElement.lang = 'en';
 const Home = () => (
     <>
         <Header />
+        <Clippy isFixed messageSet="website" />
         <header className={styles.headerContainer}>
             <h1 className={styles.headerText}>
                 {APP_NAME} - The definitive Scratch mod
