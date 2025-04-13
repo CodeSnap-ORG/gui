@@ -8,7 +8,7 @@ If you just want to play with the GUI then it's the same process as upstream scr
 
 ## License
 
-TurboWarp's modifications to Scratch are licensed under the GNU General Public License v3.0. See LICENSE or https://www.gnu.org/licenses/ for details.
+AmpMod's and TurboWarp's modifications to Scratch are licensed under the GNU General Public License v3.0. See LICENSE or https://www.gnu.org/licenses/ for details.
 
 The following is the original license for scratch-gui, which we are required to retain. This is NOT the license of this project.
 
@@ -28,6 +28,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 ```
 
 src/lib/default-project/dango.svg is based on [Twemoji](https://twemoji.twitter.com/) and is licensed under CC BY 4.0 https://creativecommons.org/licenses/by/4.0/
+
+The AmpMod logo and Apple Cat are licenced under CC-BY-SA 4.0.
 
 <!--
 
