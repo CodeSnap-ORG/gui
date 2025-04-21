@@ -379,7 +379,8 @@ export default [
             />
         ),
         tags: ['scratch'],
-        featured: true
+        featured: true,
+        disabled: true // TODO: Enable once bugs are fixed
     },
     {
         name: (
