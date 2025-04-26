@@ -69,6 +69,15 @@ class LibraryItemComponent extends React.PureComponent {
                             />
                         </div>
                     ) : null}
+                    {this.props.tags && this.props.tags.includes('new') ? (
+                        <div className={styles.newText}>
+                            <FormattedMessage
+                                defaultMessage="New!"
+                                description="Label for extensions that were recently implemented"
+                                id="gui.extensionLibrary.new"
+                            />
+                        </div>
+                    ) : null}
                     <img
                         className={styles.featuredImage}
                         loading="lazy"

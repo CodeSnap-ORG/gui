@@ -1,5 +1,6 @@
 
 @import "../../css/colors.css";
+@import "../../css/default-colors.css";
 @import "../../css/units.css";
 
 .library-item {
@@ -206,7 +207,18 @@
     padding: .5rem 1rem;
     font-size: .875rem;
     font-weight: bold;
-    color: $ui-white;
+    color: $ui-white-default;
+}
+
+.new-text {
+    position: absolute;
+    background-color: $sound-primary;
+    border-radius: 1rem;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25);
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    font-weight: bold;
+    color: $ui-white-default;
 }
 
 [dir="ltr"] .coming-soon-text {
@@ -214,6 +226,14 @@
 }
 
 [dir="rtl"] .coming-soon-text {
+    transform: translate(calc(-2 * $space), calc(2 * $space));
+}
+
+[dir="ltr"] .new-text {
+    transform: translate(calc(2 * $space), calc(2 * $space));
+}
+
+[dir="rtl"] .new-text {
     transform: translate(calc(-2 * $space), calc(2 * $space));
 }
 

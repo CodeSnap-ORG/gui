@@ -138,6 +138,7 @@ class LibraryItem extends React.PureComponent {
                 collaborator={this.props.collaborator}
                 description={this.props.description}
                 disabled={this.props.disabled}
+                tags={this.props.tags}
                 extensionId={this.props.extensionId}
                 featured={this.props.featured}
                 hidden={this.props.hidden}

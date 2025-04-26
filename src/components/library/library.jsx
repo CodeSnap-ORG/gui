@@ -319,6 +319,7 @@ class LibraryComponent extends React.Component {
                                 collaborator={dataItem.collaborator}
                                 description={dataItem.description}
                                 disabled={dataItem.disabled}
+                                tags={dataItem.tags}
                                 extensionId={dataItem.extensionId}
                                 href={dataItem.href}
                                 featured={dataItem.featured}
