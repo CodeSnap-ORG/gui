@@ -74,7 +74,7 @@ export default [
                 id="gui.extension.music.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'sound'],
         featured: true
     },
     {
@@ -95,7 +95,7 @@ export default [
                 id="gui.extension.pen.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'graphics'],
         featured: true
     },
     {
@@ -116,7 +116,7 @@ export default [
                 id="gui.extension.videosensing.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'graphics'],
         featured: true
     },
     {
@@ -138,7 +138,7 @@ export default [
                 id="gui.extension.text2speech.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'sound', 'internet'],
         featured: true,
         internetConnectionRequired: true
     },
@@ -161,7 +161,7 @@ export default [
                 id="gui.extension.translate.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'internet'],
         featured: true,
         internetConnectionRequired: true
     },
@@ -194,7 +194,7 @@ export default [
                 id="gui.extension.microbit.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'hardware'],
         featured: true,
         disabled: false,
         bluetoothRequired: true,
@@ -225,7 +225,7 @@ export default [
                 id="gui.extension.ev3.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'hardware'],
         featured: true,
         disabled: false,
         bluetoothRequired: true,
@@ -256,7 +256,7 @@ export default [
                 id="gui.extension.boost.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'hardware'],
         featured: true,
         disabled: false,
         bluetoothRequired: true,
@@ -288,7 +288,7 @@ export default [
                 id="gui.extension.wedo2.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'hardware'],
         featured: true,
         disabled: false,
         bluetoothRequired: true,
@@ -320,7 +320,7 @@ export default [
                 id="gui.extension.gdxfor.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'hardware'],
         featured: true,
         disabled: false,
         bluetoothRequired: true,
@@ -423,7 +423,7 @@ export default [
                 id="tw.customExtension.description"
             />
         ),
-        tags: ['tw'],
+        tags: ['tw', 'ampmod'],
         featured: true
         // Not marked as incompatible with Scratch so that clicking on it doesn't show a prompt
     }
@@ -433,14 +433,14 @@ export const galleryLoading = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
+            description="Name of ampmod.codeberg.page/extensions in extension library"
             id="tw.extensionGallery.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://ampmod.codeberg.page/extensions/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
@@ -451,7 +451,7 @@ export const galleryLoading = {
             id="tw.extensionGallery.loading"
         />
     ),
-    tags: ['tw'],
+    tags: ['tw', 'ampmod'],
     featured: true
 };
 
@@ -459,25 +459,25 @@ export const galleryMore = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
-            id="tw.extensionGallery.name"
+            description="Name of ampmod.codeberg.page/extensions in extension library"
+            id="tw.extensionGalleryAmp.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://ampmod.codeberg.page/extensions/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
         <FormattedMessage
             // eslint-disable-next-line max-len
-            defaultMessage="Learn more about extensions at extensions.turbowarp.org."
+            defaultMessage="Learn more about extensions at ampmod.codeberg.page/extensions."
             description="Appears after the extension list from the gallery was loaded successfully"
-            id="tw.extensionGallery.more"
+            id="tw.extensionGalleryAmp.more"
         />
     ),
-    tags: ['tw'],
+    tags: ['tw', 'ampmod'],
     featured: true
 };
 
@@ -485,24 +485,24 @@ export const galleryError = {
     name: (
         <FormattedMessage
             defaultMessage="{APP_NAME} Extension Gallery"
-            description="Name of extensions.turbowarp.org in extension library"
-            id="tw.extensionGallery.name"
+            description="Name of ampmod.codeberg.page/extensions in extension library"
+            id="tw.extensionGalleryAmp.name"
             values={{
                 APP_NAME
             }}
         />
     ),
-    href: 'https://extensions.turbowarp.org/',
+    href: 'https://ampmod.codeberg.page/extensions/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
         <FormattedMessage
             // eslint-disable-next-line max-len
-            defaultMessage="Error loading extension gallery. Visit extensions.turbowarp.org to find more extensions."
+            defaultMessage="Error loading extension gallery. Visit ampmod.codeberg.page/extensions to find more extensions."
             description="Appears when an error occurred loading extension list from the custom extension gallery"
             id="tw.extensionGallery.error"
         />
     ),
-    tags: ['tw'],
+    tags: ['tw', 'ampmod'],
     featured: true
 };

@@ -42,7 +42,7 @@ const translateGalleryItem = (extension, locale) => ({
 let cachedGallery = null;
 
 const fetchLibrary = async () => {
-    const res = await fetch('https://extensions.turbowarp.org/generated-metadata/extensions-v0.json');
+    const res = await fetch('https://ampmod.codeberg.page/extensions/generated-metadata/extensions-v0.json');
     if (!res.ok) {
         throw new Error(`HTTP status ${res.status}`);
     }
@@ -53,9 +53,12 @@ const fetchLibrary = async () => {
         description: extension.description,
         descriptionTranslations: extension.descriptionTranslations || {},
         extensionId: extension.id,
-        extensionURL: `https://extensions.turbowarp.org/${extension.slug}.js`,
-        iconURL: `https://extensions.turbowarp.org/${extension.image || 'images/unknown.svg'}`,
-        tags: ['tw'],
+        extensionURL: `https://ampmod.codeberg.page/extensions/${extension.slug}.js`,
+        iconURL: `https://ampmod.codeberg.page/extensions/${extension.image || 'images/unknown.svg'}`,
+        tags: [
+            ...(extension.isAmpMod ? ['ampmod'] : ['tw']),
+            ...(extension.tags || [])
+        ],
         credits: [
             ...(extension.original || []),
             ...(extension.by || [])
@@ -74,9 +77,9 @@ const fetchLibrary = async () => {
             }
             return credit.name;
         }),
-        docsURI: extension.docs ? `https://extensions.turbowarp.org/${extension.slug}` : null,
+        docsURI: extension.docs ? `https://ampmod.codeberg.page/extensions/${extension.slug}` : null,
         samples: extension.samples ? extension.samples.map(sample => ({
-            href: `${process.env.ROOT}editor?project_url=https://extensions.turbowarp.org/samples/${encodeURIComponent(sample)}.sb3`,
+            href: `${process.env.ROOT}editor.html?project_url=https://ampmod.codeberg.page/extensions/samples/${encodeURIComponent(sample)}.sb3`,
             text: sample
         })) : null,
         incompatibleWithScratch: !extension.scratchCompatible,

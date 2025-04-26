@@ -24,7 +24,10 @@ const manuallyTrustExtension = url => {
  * @returns {boolean} True if the extension can is trusted
  */
 const isTrustedExtension = url => (
-    // Always trust our official extension repostiory.
+    // Always trust AmpMod website.
+    url.startsWith('https://ampmod.codeberg.page/') ||
+
+    // Always trust TurboWarp's official extension repository.
     url.startsWith('https://extensions.turbowarp.org/') ||
 
     // For development.
@@ -53,6 +56,9 @@ const isAlwaysTrustedForFetching = parsed => (
     // If we would trust loading an extension from here, we can trust loading resources too.
     isTrustedExtension(parsed.href) ||
 
+    // AmpMod
+    parsed.origin === 'https://ampmod.codeberg.page' ||
+
     // Any TurboWarp service such as trampoline
     parsed.origin === 'https://turbowarp.org' ||
     parsed.origin.endsWith('.turbowarp.org') ||
@@ -67,6 +73,10 @@ const isAlwaysTrustedForFetching = parsed => (
     // GitLab API
     // GitLab Pages allows redirects, so not included here.
     parsed.origin === 'https://gitlab.com' ||
+
+    // Codeberg
+    // Codeberg Pages allows redirects, so not included here.
+    parsed.origin === 'https://codeberg.org' ||
 
     // Sourcehut Pages
     parsed.origin.endsWith('.srht.site') ||
