@@ -378,7 +378,7 @@ export default [
                 id="gui.extension.legacyLists.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch', 'data'],
         featured: true,
         disabled: true // TODO: Enable once bugs are fixed
     },
