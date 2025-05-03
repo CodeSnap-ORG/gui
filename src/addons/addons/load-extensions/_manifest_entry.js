@@ -33,7 +33,19 @@ const manifest = {
       "id": "translate",
       "type": "boolean",
       "default": false
-    }
+    },
+    {
+      "name": "TurboWarp Blocks",
+      "id": "tw",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "Future",
+      "id": "future",
+      "type": "boolean",
+      "default": false
+    }    
   ],
   "dynamicDisable": true,
   "enabledByDefault": false,
