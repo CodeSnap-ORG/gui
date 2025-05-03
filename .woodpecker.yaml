@@ -48,7 +48,7 @@ steps:
       - cd build
       # Prepare for push
       - git remote set-url origin https://$CBTOKEN@codeberg.org/ampmod/pages.git
-      - git rm -rf ./**/*
+      - git rm -rf ./*
       - git commit -m 'Woodpecker CI - Clean up.'
       - cd ..
       # Run 11ty build stage
