@@ -79,7 +79,7 @@ const fetchLibrary = async () => {
         }),
         docsURI: extension.docs ? `https://ampmod.codeberg.page/extensions/${extension.slug}` : null,
         samples: extension.samples ? extension.samples.map(sample => ({
-            href: `${process.env.ROOT}editor.html?project_url=https://ampmod.codeberg.page/extensions/samples/${encodeURIComponent(sample)}.sb3`,
+            href: `${process.env.ROOT}editor.html?project_url=https://ampmod.codeberg.page/extensions/samples/${encodeURIComponent(sample)}`,
             text: sample
         })) : null,
         incompatibleWithScratch: !extension.scratchCompatible,

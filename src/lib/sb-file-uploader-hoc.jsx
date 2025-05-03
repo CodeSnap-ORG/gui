@@ -80,7 +80,13 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                             multiple: false,
                             types: [
                                 {
-                                    description: 'Scratch Project',
+                                    description: 'AmpMod Project',
+                                    accept: {
+                                        'application/octet-stream': ['.apz']
+                                    }
+                                },
+                                {
+                                    description: 'Vanilla Scratch Project',
                                     accept: {
                                         // Using application/x.scratch.sb3 as done in scratch-vm causes file pickers
                                         // to disallow picking any items in Chrome 133 on Android.
@@ -108,7 +114,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             } else {
                 // create <input> element and add it to DOM
                 this.inputElement = document.createElement('input');
-                this.inputElement.accept = '.sb,.sb2,.sb3';
+                this.inputElement.accept = '.apz,.sb,.sb2,.sb3';
                 this.inputElement.style = 'display: none;';
                 this.inputElement.type = 'file';
                 this.inputElement.onchange = this.handleChange; // connects to step 3
@@ -181,8 +187,8 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         getProjectTitleFromFilename (fileInputFilename) {
             if (!fileInputFilename) return '';
             // only parse title with valid scratch project extensions
-            // (.sb, .sb2, and .sb3)
-            const matches = fileInputFilename.match(/^(.*)\.sb[23]?$/);
+            // (scratch/turbowarp: .sb, .sb2, and .sb3) (ampmod: apz)
+            const matches = fileInputFilename.match(/^(.*)\.(sb[23]|apz)?$/);
             if (!matches) return '';
             return matches[1].substring(0, 100); // truncate project title to max 100 chars
         }

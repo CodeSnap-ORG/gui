@@ -47,6 +47,7 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 import twIcon from './tw/tw.svg';
+import futureIcon from './future/future.svg';
 import customExtensionIcon from './custom/custom.svg';
 import legacyListsIcon from './legacyLists/legacylists.svg';
 import galleryIcon from './gallery/gallery.svg';
@@ -56,27 +57,6 @@ import {APP_NAME} from '../../brand';
 //import listInsetIconURL from './list/list-small.svg';
 
 export default [
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Music"
-                description="Name for the 'Music' extension"
-                id="gui.extension.music.name"
-            />
-        ),
-        extensionId: 'music',
-        iconURL: musicIconURL,
-        insetIconURL: musicInsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Play instruments and drums."
-                description="Description for the 'Music' extension"
-                id="gui.extension.music.description"
-            />
-        ),
-        tags: ['scratch', 'sound'],
-        featured: true
-    },
     {
         name: (
             <FormattedMessage
@@ -96,6 +76,27 @@ export default [
             />
         ),
         tags: ['scratch', 'graphics'],
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Music"
+                description="Name for the 'Music' extension"
+                id="gui.extension.music.name"
+            />
+        ),
+        extensionId: 'music',
+        iconURL: musicIconURL,
+        insetIconURL: musicInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Play instruments and drums."
+                description="Description for the 'Music' extension"
+                id="gui.extension.music.description"
+            />
+        ),
+        tags: ['scratch', 'sound'],
         featured: true
     },
     {
@@ -178,7 +179,100 @@ export default [
                 id="gui.extension.makeymakey.description"
             />
         ),
-        tags: ['scratch'],
+        tags: ['scratch'], // TODO: Whether this should be a hardware extension is up for debate
+        featured: true
+    },
+    // Custom Reporters is commented out because it was moved to the base editor
+    /* {
+        // not really an extension, but it's easiest to present it as one
+        name: (
+            <FormattedMessage
+                defaultMessage="Custom Reporters"
+                description="Name of custom reporters extension"
+                id="tw.customReporters.name"
+            />
+        ),
+        extensionId: 'procedures_enable_return',
+        iconURL: returnIcon,
+        description: (
+            <FormattedMessage
+                defaultMessage="Allow custom blocks to output values and be used as inputs."
+                description="Description of custom reporters extension"
+                id="tw.customReporters.description"
+            />
+        ),
+        tags: ['tw'],
+        incompatibleWithScratch: true,
+        featured: true
+    }, */
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Legacy Lists"
+                description="Name for the 'Legacy Lists' extension"
+                id="gui.extension.legacyLists.name"
+            />
+        ),
+        extensionId: 'data_enable_lists',
+        iconURL: legacyListsIcon,
+        description: (
+            <FormattedMessage
+                defaultMessage="Use the vanilla list system. Note that the Arrays blocks are more flexible and should be used instead if possible."
+                description="Description for the 'Legacy Lists' extension"
+                id="gui.extension.legacyLists.description"
+            />
+        ),
+        tags: ['scratch', 'data'],
+        featured: true,
+        disabled: true // TODO: Enable once bugs are fixed
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="TurboWarp Blocks"
+                description="Name of the strange 'TurboWarp Blocks' extension"
+                id="tw.twExtension.name"
+                values={{
+                    APP_NAME
+                }}
+            />
+        ),
+        extensionId: 'tw',
+        iconURL: twIcon,
+        description: (
+            <FormattedMessage
+                defaultMessage="Weird new blocks."
+                description="Description of the strange 'TurboWarp Blocks' extension"
+                id="tw.twExtension.description"
+            />
+        ),
+        incompatibleWithScratch: true,
+        tags: ['tw'],
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Future"
+                description="Name of the 'Future' extension"
+                id="ub.futureExtension.name"
+            />
+        ),
+        extensionId: 'future',
+        iconURL: futureIcon,
+        description: (
+            <FormattedMessage
+                defaultMessage="Experimental core blocks that may or may not make it into a future release of {APP_NAME}."
+                description="Description of the 'TurboWarp Blocks' extension"
+                id="ub.futureExtension.description"
+                values={{
+                    APP_NAME
+                }}
+            />
+        ),
+        incompatibleWithScratch: true,
+        docsURI: "https://ampmod.miraheze.org/wiki/Future",
+        tags: ['ampmod'],
         featured: true
     },
     {
@@ -337,74 +431,6 @@ export default [
             />
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
-    },
-    // Custom Reporters is commented out because it was moved to the base editor
-    /* {
-        // not really an extension, but it's easiest to present it as one
-        name: (
-            <FormattedMessage
-                defaultMessage="Custom Reporters"
-                description="Name of custom reporters extension"
-                id="tw.customReporters.name"
-            />
-        ),
-        extensionId: 'procedures_enable_return',
-        iconURL: returnIcon,
-        description: (
-            <FormattedMessage
-                defaultMessage="Allow custom blocks to output values and be used as inputs."
-                description="Description of custom reporters extension"
-                id="tw.customReporters.description"
-            />
-        ),
-        tags: ['tw'],
-        incompatibleWithScratch: true,
-        featured: true
-    }, */
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Legacy Lists"
-                description="Name for the 'Legacy Lists' extension"
-                id="gui.extension.legacyLists.name"
-            />
-        ),
-        extensionId: 'data_enable_lists',
-        iconURL: legacyListsIcon,
-        description: (
-            <FormattedMessage
-                defaultMessage="Use the vanilla list system. Note that the Arrays blocks are more flexible and should be used instead if possible."
-                description="Description for the 'Legacy Lists' extension"
-                id="gui.extension.legacyLists.description"
-            />
-        ),
-        tags: ['scratch', 'data'],
-        featured: true,
-        disabled: true // TODO: Enable once bugs are fixed
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="TurboWarp Blocks"
-                description="Name of the strange 'TurboWarp Blocks' extension"
-                id="tw.twExtension.name"
-                values={{
-                    APP_NAME
-                }}
-            />
-        ),
-        extensionId: 'tw',
-        iconURL: twIcon,
-        description: (
-            <FormattedMessage
-                defaultMessage="Weird new blocks."
-                description="Description of the strange 'TurboWarp Blocks' extension"
-                id="tw.twExtension.description"
-            />
-        ),
-        incompatibleWithScratch: true,
-        tags: ['tw'],
-        featured: true
     },
     {
         name: (
