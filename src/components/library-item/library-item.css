@@ -1,4 +1,3 @@
-
 @import "../../css/colors.css";
 @import "../../css/default-colors.css";
 @import "../../css/units.css";
@@ -17,21 +16,24 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: $text-primary;
     background: $ui-white;
-    border-width: 2px;
-    border-style: solid;
-    border-color: $ui-black-transparent;
+    box-shadow: 0 0 0 2px $ui-black-transparent;
     border-radius: $space;
     text-align: center;
     cursor: pointer;
+    transition: box-shadow 0.3s ease;
 }
 
 .library-item-extension {
     align-self: stretch;
+    text-align: left;
 }
 
 .library-item:hover {
-    border-width: 2px;
-    border-color: $looks-secondary;
+    box-shadow: 0 0 0 5px $looks-transparent;
+}
+
+.library-item.new:hover {
+    box-shadow: 0 0 0 5px $turbowarp-transparent;
 }
 
 .hidden {
@@ -44,7 +46,7 @@
 }
 
 .disabled:hover {
-    border-color: $ui-black-transparent;
+    box-shadow: 0 0 0 5px $ui-black-transparent;
 }
 
 .library-item-image-container-wrapper {
@@ -129,9 +131,9 @@
 
 .featured-text {
     font-weight: bold;
-    padding: 10px;
     /* height: 140px; */
     width: 300px;
+    padding: 0.5rem 1.25rem 1rem 1.25rem;
 }
 
 .featured-description {
@@ -199,42 +201,35 @@
     text-decoration: underline;
 }
 
-.coming-soon-text {
+.coming-soon-text, .new-text {
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+    top: 0;
+    right: 0;
     position: absolute;
-    background-color: $data-primary;
-    border-radius: 1rem;
-    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25);
-    padding: .5rem 1rem;
-    font-size: .875rem;
     font-weight: bold;
-    color: $ui-white-default;
+}
+
+[dir="ltr"] .coming-soon-text, [dir="ltr"] .new-text {
+    right: 0rem;
+    border-bottom-left-radius: $space;
+    left: auto;
+}
+
+[dir="rtl"] .coming-soon-text, [dir="rtl"] .new-text {
+    left: 0rem;
+    border-bottom-left-radius: $space;
+    right: auto;
 }
 
 .new-text {
-    position: absolute;
-    background-color: $sound-primary;
-    border-radius: 1rem;
-    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25);
-    padding: .5rem 1rem;
-    font-size: .875rem;
-    font-weight: bold;
+    background-color: $turbowarp-color;
     color: $ui-white-default;
 }
 
-[dir="ltr"] .coming-soon-text {
-    transform: translate(calc(2 * $space), calc(2 * $space));
-}
-
-[dir="rtl"] .coming-soon-text {
-    transform: translate(calc(-2 * $space), calc(2 * $space));
-}
-
-[dir="ltr"] .new-text {
-    transform: translate(calc(2 * $space), calc(2 * $space));
-}
-
-[dir="rtl"] .new-text {
-    transform: translate(calc(-2 * $space), calc(2 * $space));
+.coming-soon-text {
+    background-color: $data-primary;
+    color: $ui-white-default;
 }
 
 .favorite-container {

@@ -180,9 +180,7 @@ class LoaderComponent extends React.Component {
                 />
                 </div> */}
 
-                <div className={styles.customSpinner}>
-                    <div className={styles.spinnerCircle}></div>
-                </div>
+                <div className={styles.spinnerCircle}></div>
 
                 <div className={styles.title}>
                 {mainMessages[this.props.messageId]}

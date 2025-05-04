@@ -10,7 +10,9 @@ const guiColors = {
     'extensions-tertiary': '#2e742e',
     'extensions-transparent': 'hsla(120, 100%, 30%, 0.35)',
     'extensions-light': '#4a9a4a',
-    'drop-highlight': '#66bb6a'
+    'drop-highlight': '#66bb6a',
+    'turbowarp-color': '#ff4c4c',
+    'turbowarp-transparent': '#ff4c4c26',
 };
 
 const blockColors = {

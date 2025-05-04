@@ -78,3 +78,6 @@ $project-title-inactive: var(--project-title-inactive);
 $project-title-hover: var(--project-title-hover);
 
 $link-color: var(--link-color);
+
+$turbowarp-color: var(--turbowarp-color);
+$turbowarp-transparent: var(--turbowarp-transparent);

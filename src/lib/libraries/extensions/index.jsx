@@ -272,7 +272,7 @@ export default [
         ),
         incompatibleWithScratch: true,
         docsURI: "https://ampmod.miraheze.org/wiki/Future",
-        tags: ['ampmod'],
+        tags: ['ampmod', 'new', 'catexp'],
         featured: true
     },
     {

@@ -922,6 +922,9 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         turbowarpXML = turbowarpXML.replace('<block', `${extraTurboWarpBlocks}<block`);
     }
 
+    // Always display future blocks as the first extension, if it exists.
+    let futureXML = moveCategory('future');
+
     const everything = [
         xmlOpen,
         motionXML, gap,
@@ -935,6 +938,10 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         arraysXML, gap,
         myBlocksXML
     ];
+
+    if (futureXML) {
+        everything.push(gap, futureXML);
+    }
 
     if (turbowarpXML) {
         everything.push(gap, turbowarpXML);

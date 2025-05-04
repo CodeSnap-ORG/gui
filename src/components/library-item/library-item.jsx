@@ -52,7 +52,8 @@ class LibraryItemComponent extends React.PureComponent {
                     styles.libraryItem,
                     styles.featuredItem,
                     {
-                        [styles.disabled]: this.props.disabled
+                        [styles.disabled]: this.props.disabled,
+                        [styles.new]: this.props.tags.includes('new'),
                     },
                     typeof this.props.extensionId === 'string' ? styles.libraryItemExtension : null,
                     this.props.hidden ? styles.hidden : null
