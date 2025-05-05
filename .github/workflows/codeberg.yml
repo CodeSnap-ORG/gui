@@ -20,7 +20,7 @@ jobs:
           git config --global user.name "Apple Cat"
 
       - name: Add Codeberg remote
-        run: git remote add codeberg "https://AmpElectrecuted:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/AmpMod/scratch-gui.git"
+        run: git remote add codeberg "https://aec:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/ampmod/scratch-gui.git"
 
       - name: Fetch from Codeberg
         run: git fetch codeberg --prune
