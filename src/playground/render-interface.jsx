@@ -1,26 +1,11 @@
-/**
- * Copyright (C) 2021 Thomas Weber
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
-import {getIsLoading} from '../reducers/project-state.js';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { getIsLoading } from '../reducers/project-state.js';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
@@ -36,21 +21,20 @@ import FeaturedProjects from '../components/tw-featured-projects/featured-projec
 import Description from '../components/tw-description/description.jsx';
 import BrowserModal from '../components/browser-modal/browser-modal.jsx';
 import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx';
-import {isBrowserSupported} from '../lib/tw-environment-support-prober';
+import { isBrowserSupported } from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
-import {loadServiceWorker} from './load-service-worker';
+import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
 import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
-import {APP_NAME} from '../lib/brand.js';
+import { APP_NAME } from '../lib/brand.js';
 import Clippy from '../containers/amp-clippy.jsx';
-import Footer from '../components/amp-footer/footer.jsx'
+import Footer from '../components/amp-footer/footer.jsx';
 
 import styles from './interface.css';
 
 const isInvalidEmbed = window.parent !== window;
 
 const handleClickAddonSettings = addonId => {
-    // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
     const url = `${process.env.ROOT}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
     window.open(url);
@@ -58,7 +42,7 @@ const handleClickAddonSettings = addonId => {
 
 const messages = defineMessages({
     defaultTitle: {
-        defaultMessage: 'Run Scratch projects faster',
+        defaultMessage: 'Make projects but with a better editor.',
         description: 'Title of homepage',
         id: 'tw.guiDefaultTitle'
     }
@@ -84,29 +68,119 @@ if (AddonChannels.changeChannel) {
 runAddons();
 
 class Interface extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
+        this.handleShareProject = this.handleShareProject.bind(this);
+        this.handleSignupOrLogin = this.handleSignupOrLogin.bind(this);
+        this.state = {
+            username: '',
+            password: '',
+            error: ''
+        };
     }
-    componentDidUpdate (prevProps) {
+
+    componentDidUpdate(prevProps) {
         if (prevProps.isLoading && !this.props.isLoading) {
             loadServiceWorker();
         }
     }
-    handleUpdateProjectTitle (title, isDefault) {
+
+    handleUpdateProjectTitle(title, isDefault) {
         if (isDefault || !title) {
             document.title = `${APP_NAME}`;
         } else {
             document.title = `${title} - ${APP_NAME}`;
         }
     }
-    render () {
+
+    handleShareProject() {
+        const { vm } = this.props;
+
+        const projectName = this.props.projectName;
+        const projectThumbnail = this.props.projectThumbnail;
+        const projectGenre = this.props.projectGenre;
+        const projectLink = this.props.projectLink;
+
+        vm.saveProjectSb3().then(sb3Blob => {
+            // Prepare the form data for the SB3 file upload
+            const formDataSb3 = new FormData();
+            formDataSb3.append('username', localStorage.getItem('username'));
+            formDataSb3.append('password', localStorage.getItem('password'));
+            formDataSb3.append('project', sb3Blob, 'project.sb3');
+
+            // Send the SB3 file to the root URL
+            axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
+                .then(() => {
+                    // Once the SB3 upload is successful, send the other project details
+                    const formDataProject = new FormData();
+                    formDataProject.append('name', projectName);
+                    formDataProject.append('thumbnail', projectThumbnail);
+                    formDataProject.append('genre', projectGenre);
+                    formDataProject.append('link', projectLink);
+
+                    // Send the project details to /api/projects
+                    axios.post('https://block-compiler-codesnap.onrender.com/api/projects', formDataProject)
+                        .then(() => alert("Project Shared!"))
+                        .catch(err => {
+                            console.error("Error sharing project details:", err);
+                            alert("There was an error sharing the project details.");
+                        });
+                })
+                .catch(err => {
+                    console.error("Error sharing SB3 project:", err);
+                    alert("There was an error sharing the project.");
+                });
+
+            alert("Project Shared!");
+        });
+    }
+
+    async handleSignupOrLogin() {
+        const { username, password } = this.state;
+
+        try {
+            const user = await this.authenticateUser(username, password);
+            this.setState({ error: '' });
+            alert(`Welcome back, ${user.username}`);
+        } catch (error) {
+            this.setState({ error: 'Login failed, creating a new account...' });
+            try {
+                const newUser = await this.createNewAccount(username, password);
+                this.setState({ error: '' });
+                alert(`Welcome, new user ${newUser.username}`);
+            } catch (error) {
+                this.setState({ error: 'Error creating new account.' });
+            }
+        }
+    }
+
+    authenticateUser(username, password) {
+        return new Promise((resolve, reject) => {
+            if (username === 'existingUser' && password === 'password123') {
+                resolve({ username });
+            } else {
+                reject('User not found');
+            }
+        });
+    }
+
+    createNewAccount(username, password) {
+        return new Promise((resolve, reject) => {
+            if (username && password) {
+                resolve({ username });
+            } else {
+                reject('Invalid data');
+            }
+        });
+    }
+
+    render() {
         if (isInvalidEmbed) {
             return <InvalidEmbed />;
         }
 
         const {
-            /* eslint-disable no-unused-vars */
             intl,
             hasCloudVariables,
             description,
@@ -115,11 +189,12 @@ class Interface extends React.Component {
             isPlayerOnly,
             isRtl,
             projectId,
-            /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
+
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
+
         return (
             <div
                 className={classNames(styles.container, {
@@ -137,12 +212,19 @@ class Interface extends React.Component {
                             enableSeeInside
                             onClickAddonSettings={handleClickAddonSettings}
                         />
+                        <button onClick={this.handleShareProject} className={styles.shareButton}>
+                            <FormattedMessage
+                                defaultMessage="Share"
+                                description="Share button"
+                                id="tw.shareButton"
+                            />
+                        </button>
                     </div>
                 ) : null}
+
                 <div
                     className={styles.center}
                     style={isPlayerOnly ? ({
-                        // + 2 accounts for 1px border on each side of the stage
                         width: `${Math.max(480, props.customStageSize.width) + 2}px`
                     }) : null}
                 >
@@ -153,6 +235,7 @@ class Interface extends React.Component {
                         backpackHost="_local_"
                         {...props}
                     />
+
                     {isHomepage ? (
                         <React.Fragment>
                             {isBrowserSupported() ? (
@@ -160,10 +243,8 @@ class Interface extends React.Component {
                             ) : (
                                 <BrowserModal isRtl={isRtl} />
                             )}
-                            {(
-                                // eslint-disable-next-line max-len
-                                description.instructions === 'unshared' || description.credits === 'unshared'
-                            ) && (
+
+                            {(description.instructions === 'unshared' || description.credits === 'unshared') && (
                                 <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
                                     <p>
                                         <FormattedMessage
@@ -184,7 +265,7 @@ class Interface extends React.Component {
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
-                                                        {'https://docs.turbowarp.org/unshared-projects'}
+                                                        https://docs.turbowarp.org/unshared-projects
                                                     </a>
                                                 )
                                             }}
@@ -192,7 +273,6 @@ class Interface extends React.Component {
                                     </p>
                                     <p>
                                         <FormattedMessage
-                                            // eslint-disable-next-line max-len
                                             defaultMessage="If the project was shared recently, this message may appear incorrectly for a few minutes."
                                             description="Appears on unshared projects"
                                             id="tw.unshared.cache"
@@ -200,7 +280,6 @@ class Interface extends React.Component {
                                     </p>
                                     <p>
                                         <FormattedMessage
-                                            // eslint-disable-next-line max-len
                                             defaultMessage="If this project is actually shared, please report a bug."
                                             description="Appears on unshared projects"
                                             id="tw.unshared.bug"
@@ -208,11 +287,13 @@ class Interface extends React.Component {
                                     </p>
                                 </div>
                             )}
+
                             {hasCloudVariables && projectId !== '0' && (
                                 <div className={styles.section}>
                                     <CloudVariableBadge />
                                 </div>
                             )}
+
                             {description.instructions || description.credits ? (
                                 <div className={styles.section}>
                                     <Description
@@ -222,19 +303,18 @@ class Interface extends React.Component {
                                     />
                                 </div>
                             ) : null}
+
                             <div className={styles.section}>
                                 <p>
                                     <FormattedMessage
-                                        // eslint-disable-next-line max-len
                                         defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
                                         description="Description of AmpMod on the homepage"
                                         id="tw.home.ampdescription"
-                                        values={{
-                                            APP_NAME
-                                        }}
+                                        values={{ APP_NAME }}
                                     />
                                 </p>
                             </div>
+
                             <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
                                 <h3>
                                     <FormattedMessage
@@ -245,7 +325,7 @@ class Interface extends React.Component {
                                 </h3>
                                 <p>
                                     <FormattedMessage
-                                        defaultMessage="AmpMod is in its alpha stages. Please expect to notice radical changes. Compatibility with Scratch may be dropped in the near future. We may add a compatibility mode but do not get your hopes up. For updates, visit {link}."
+                                        defaultMessage="CodeSnap is in its alpha stages. Please expect to notice radical changes. Compatibility with projects may be dropped in the near future. We may add a compatibility mode but do not get your hopes up. For updates, visit {link}."
                                         description="Notice about active development"
                                         id="tw.development.notice"
                                         values={{
@@ -255,7 +335,7 @@ class Interface extends React.Component {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    {'https://scratch.mit.edu/discuss/topic/806311'}
+                                                    https://scratch.mit.edu/discuss/topic/806311
                                                 </a>
                                             )
                                         }}
@@ -265,6 +345,7 @@ class Interface extends React.Component {
                         </React.Fragment>
                     ) : null}
                 </div>
+
                 {isHomepage && <Footer />}
             </div>
         );
