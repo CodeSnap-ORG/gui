@@ -1,35 +1,34 @@
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import React from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
-import { getIsLoading } from '../reducers/project-state.js';
-import AppStateHOC from '../lib/app-state-hoc.jsx';
-import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
-import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
-import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
-import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
-import TWPackagerIntegrationHOC from '../lib/tw-packager-integration-hoc.jsx';
-import SettingsStore from '../addons/settings-store-singleton';
-import '../lib/tw-fix-history-api';
-import GUI from './render-gui.jsx';
-import MenuBar from '../components/menu-bar/menu-bar.jsx';
-import ProjectInput from '../components/tw-project-input/project-input.jsx';
-import FeaturedProjects from '../components/tw-featured-projects/featured-projects.jsx';
-import Description from '../components/tw-description/description.jsx';
-import BrowserModal from '../components/browser-modal/browser-modal.jsx';
-import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx';
-import { isBrowserSupported } from '../lib/tw-environment-support-prober';
-import AddonChannels from '../addons/channels';
-import { loadServiceWorker } from './load-service-worker';
-import runAddons from '../addons/entry';
-import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
-import { APP_NAME } from '../lib/brand.js';
-import Clippy from '../containers/amp-clippy.jsx';
-import Footer from '../components/amp-footer/footer.jsx';
-
+import classNames from 'classnames'; 
+import PropTypes from 'prop-types'; 
+import React from 'react'; 
+import axios from 'axios'; 
+import { connect } from 'react-redux'; 
+import { compose } from 'redux'; 
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl'; 
+import { getIsLoading } from '../reducers/project-state.js'; 
+import AppStateHOC from '../lib/app-state-hoc.jsx'; 
+import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx'; 
+import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx'; 
+import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx'; 
+import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx'; 
+import TWPackagerIntegrationHOC from '../lib/tw-packager-integration-hoc.jsx'; 
+import SettingsStore from '../addons/settings-store-singleton'; 
+import '../lib/tw-fix-history-api'; 
+import GUI from './render-gui.jsx'; 
+import MenuBar from '../components/menu-bar/menu-bar.jsx'; 
+import ProjectInput from '../components/tw-project-input/project-input.jsx'; 
+import FeaturedProjects from '../components/tw-featured-projects/featured-projects.jsx'; 
+import Description from '../components/tw-description/description.jsx'; 
+import BrowserModal from '../components/browser-modal/browser-modal.jsx'; 
+import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx'; 
+import { isBrowserSupported } from '../lib/tw-environment-support-prober'; 
+import AddonChannels from '../addons/channels'; 
+import { loadServiceWorker } from './load-service-worker'; 
+import runAddons from '../addons/entry'; 
+import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx'; 
+import { APP_NAME } from '../lib/brand.js'; 
+import Clippy from '../containers/amp-clippy.jsx'; 
+import Footer from '../components/amp-footer/footer.jsx'; 
 import styles from './interface.css';
 
 const isInvalidEmbed = window.parent !== window;
@@ -102,23 +101,19 @@ class Interface extends React.Component {
         const projectLink = `https://codesnap-org.github.io/projects/?project_url=https://block-compiler-codesnap.onrender.com/projects/${projectId}`;
 
         vm.saveProjectSb3().then(sb3Blob => {
-            // Prepare the form data for the SB3 file upload
             const formDataSb3 = new FormData();
             formDataSb3.append('username', localStorage.getItem('username'));
             formDataSb3.append('password', localStorage.getItem('password'));
             formDataSb3.append('project', sb3Blob, 'project.sb3');
 
-            // Send the SB3 file to the root URL
             axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
                 .then(() => {
-                    // Once the SB3 upload is successful, send the other project details
                     const formDataProject = new FormData();
                     formDataProject.append('name', projectName);
                     formDataProject.append('thumbnail', projectThumbnail);
                     formDataProject.append('genre', this.props.projectGenre);
                     formDataProject.append('link', projectLink);
 
-                    // Send the project details to /api/projects
                     axios.post('https://block-compiler-codesnap.onrender.com/api/projects', formDataProject)
                         .then(() => alert("Project Shared!"))
                         .catch(err => {
@@ -194,6 +189,10 @@ class Interface extends React.Component {
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
 
+        // Check for 'project_url' in the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasProjectUrlParam = urlParams.has('project_url');
+
         return (
             <div
                 className={classNames(styles.container, {
@@ -210,15 +209,19 @@ class Interface extends React.Component {
                         enableSeeInside
                         onClickAddonSettings={handleClickAddonSettings}
                     />
-                    {/* Hide the share button if there is no username in localStorage */}
-                    {localStorage.getItem('username') && (
-                        <button onClick={this.handleShareProject} className={styles.shareButton}>
-                            <FormattedMessage
-                                defaultMessage="Share"
-                                description="Share button"
-                                id="tw.shareButton"
-                            />
-                        </button>
+                    
+                    {/* Conditional rendering of the share button */}
+                    {!hasProjectUrlParam && localStorage.getItem('username') && (
+                        <div className={styles.projectHeader}>
+                            <h2 className={styles.projectName}>{this.props.projectName}</h2>
+                            <button onClick={this.handleShareProject} className={styles.shareButton}>
+                                <FormattedMessage
+                                    defaultMessage="Share"
+                                    description="Share button"
+                                    id="tw.shareButton"
+                                />
+                            </button>
+                        </div>
                     )}
                 </div>
 
@@ -378,7 +381,8 @@ const mapStateToProps = state => ({
     isLoading: getIsLoading(state.scratchGui.projectState.loadingState),
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isRtl: state.locales.isRtl,
-    projectId: state.scratchGui.projectState.projectId
+    projectId: state.scratchGui.projectState.projectId,
+    projectName: state.scratchGui.projectState.projectName
 });
 
 const mapDispatchToProps = () => ({});
