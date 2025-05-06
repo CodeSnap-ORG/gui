@@ -95,12 +95,11 @@ class Interface extends React.Component {
     }
 
     handleShareProject() {
-        const { vm } = this.props;
-
+        const { vm, projectId } = this.props;
+        
         const projectName = this.props.projectName;
-        const projectThumbnail = this.props.projectThumbnail;
-        const projectGenre = this.props.projectGenre;
-        const projectLink = this.props.projectLink;
+        const projectThumbnail = 'https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg';
+        const projectLink = `https://codesnap-org.github.io/projects/?project_url=https://block-compiler-codesnap.onrender.com/projects/${projectId}`;
 
         vm.saveProjectSb3().then(sb3Blob => {
             // Prepare the form data for the SB3 file upload
@@ -116,7 +115,7 @@ class Interface extends React.Component {
                     const formDataProject = new FormData();
                     formDataProject.append('name', projectName);
                     formDataProject.append('thumbnail', projectThumbnail);
-                    formDataProject.append('genre', projectGenre);
+                    formDataProject.append('genre', this.props.projectGenre);
                     formDataProject.append('link', projectLink);
 
                     // Send the project details to /api/projects
@@ -203,15 +202,16 @@ class Interface extends React.Component {
                 })}
                 dir={isRtl ? 'rtl' : 'ltr'}
             >
-                {isHomepage ? (
-                    <div className={styles.menu}>
-                        <WrappedMenuBar
-                            canChangeLanguage
-                            canManageFiles
-                            canChangeTheme
-                            enableSeeInside
-                            onClickAddonSettings={handleClickAddonSettings}
-                        />
+                <div className={styles.menu}>
+                    <WrappedMenuBar
+                        canChangeLanguage
+                        canManageFiles
+                        canChangeTheme
+                        enableSeeInside
+                        onClickAddonSettings={handleClickAddonSettings}
+                    />
+                    {/* Hide the share button if there is no username in localStorage */}
+                    {localStorage.getItem('username') && (
                         <button onClick={this.handleShareProject} className={styles.shareButton}>
                             <FormattedMessage
                                 defaultMessage="Share"
@@ -219,8 +219,8 @@ class Interface extends React.Component {
                                 id="tw.shareButton"
                             />
                         </button>
-                    </div>
-                ) : null}
+                    )}
+                </div>
 
                 <div
                     className={styles.center}
