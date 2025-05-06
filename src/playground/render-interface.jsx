@@ -104,6 +104,7 @@ class Interface extends React.Component {
             const formDataSb3 = new FormData();
             formDataSb3.append('username', localStorage.getItem('username'));
             formDataSb3.append('password', localStorage.getItem('password'));
+            formDataSb3.append('projectName', projectName);
             formDataSb3.append('project', sb3Blob, 'project.sb3');
 
             axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
@@ -114,12 +115,6 @@ class Interface extends React.Component {
                     formDataProject.append('genre', this.props.projectGenre);
                     formDataProject.append('link', projectLink);
 
-                    axios.post('https://block-compiler-codesnap.onrender.com/api/projects', formDataProject)
-                        .then(() => alert("Project Shared!"))
-                        .catch(err => {
-                            console.error("Error sharing project details:", err);
-                            alert("There was an error sharing the project details.");
-                        });
                 })
                 .catch(err => {
                     console.error("Error sharing SB3 project:", err);
