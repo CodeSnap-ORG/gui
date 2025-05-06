@@ -115,3 +115,43 @@ a {
     border-color: #ff52526e;
     background-color: #ff525240;
 }
+
+.shareButton {
+    background-color: #ff3b30; /* Scratch's red color */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase; /* Make the text capitalized */
+}
+
+.shareButton:hover {
+    background-color: #e63226; /* Darker red for hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.shareButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4d90fe;
+}
+
+.shareButton svg {
+    margin-right: 8px; /* Add some space between the icon and text */
+}
+
+.shareButton:disabled {
+    background-color: #d1d1d1;
+    cursor: not-allowed;
+}
+
+.shareButtonWrapper {
+    display: flex;
+    align-items: center;
+}
