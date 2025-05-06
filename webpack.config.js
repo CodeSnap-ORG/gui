@@ -192,7 +192,7 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['player'],
                 template: 'src/playground/simple.ejs',
-                filename: 'player.html',
+                filename: 'index.html',
                 title: APP_NAME,
                 ...htmlWebpackPluginCommon
             }),
@@ -213,7 +213,7 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['home'],
                 template: 'src/playground/simple.ejs',
-                filename: 'index.html',
+                filename: 'qsx.html',
                 title: `Home - ${APP_NAME}`,
                 ...htmlWebpackPluginCommon
             }),
