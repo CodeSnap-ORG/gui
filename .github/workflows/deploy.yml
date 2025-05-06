@@ -1,0 +1,44 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # every 10 minutes
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      id-token: write
+      pages: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies and Build
+        run: |
+          npm install axios
+          npm install
+          npm run build
+          
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: build  # adjust if needed
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
