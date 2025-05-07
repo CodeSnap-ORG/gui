@@ -9,6 +9,7 @@ import React from 'react';
 
 import VM from 'scratch-vm';
 
+import ShareButton from '../share-button.jsx';
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CommunityButton from './community-button.jsx';
