@@ -1016,14 +1016,14 @@ class MenuBar extends React.Component {
                     <div className={styles.menuBarItem}>
                         <a
                             className={styles.feedbackLink}
-                            href="https://scratch.mit.edu/discuss/topic/806311"
-                            rel="noopener noreferrer"
+                            href="https://codesnap-org.github.io/"
+                            rel="noopener no referrer" 
                             target="_blank"
                         >
                             {/* todo: icon */}
                             <Button className={styles.feedbackButton}>
                                 <FormattedMessage
-                                    defaultMessage="AmpMod Forum Topic"
+                                    defaultMessage="CodeSnap Home"
                                     description="Button to give feedback in the menu bar"
                                     id="tw.topicButton"
                                     values={{
