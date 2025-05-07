@@ -176,17 +176,7 @@ class Interface extends React.Component {
         const isEditor = !isPlayerOnly;
 
         // If project_url is not in URL, show default description (CodeSnap alpha stage message)
-        const descriptionMessage = hasProjectUrl ? null : (
-            <div className={styles.section}>
-                <p>
-                    <FormattedMessage
-                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
-                        id="tw.home.ampdescription"
-                        values={{ APP_NAME }}
-                    />
-                </p>
-            </div>
-        );
+        const descriptionMessage = hasProjectUrl ? null : null; // Removed alpha message here
 
         // Hide share button if no username in localStorage or if there is a 'project_url'
         const showShareButton = localStorage.getItem('username') && !hasProjectUrl;
@@ -207,15 +197,6 @@ class Interface extends React.Component {
                         onClickAddonSettings={handleClickAddonSettings}
                     />
                     <div className={styles.alphaShareContainer}>
-                        <div className={styles.alphaNotice}>
-                            <FormattedMessage
-                                defaultMessage="CodeSnap is in its alpha stages... For updates, visit {link}."
-                                id="tw.development.notice"
-                                values={{
-                                    link: <a href="https://scratch.mit.edu/discuss/topic/806311" target="_blank" rel="noopener noreferrer">scratch.mit.edu</a>
-                                }}
-                            />
-                        </div>
                         {showShareButton && (
                             <button
                                 onClick={this.handleShareProject}
