@@ -69,11 +69,19 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                         if (title) {
                             this.props.onSetProjectTitle(title);
                         }
+                        const url2 = new URLParamsSearch(window.location.search);
                         const authorName = data.author.username;
                         const authorThumbnail = `https://trampoline.turbowarp.org/avatars/${data.author.id}`;
                         this.props.onSetAuthor(authorName, authorThumbnail);
                         const instructions = data.instructions || '';
                         const credits = data.description || '';
+                        if(url2.has('author') {
+                          const authorName = url.get('author');
+                        }
+                        if(url2.has('credits') && url2.has('instructions')) {
+                            const instructions = url2.get('instructions');
+                            const credits = url2.get('credits');
+                        }
                         if (instructions || credits) {
                             this.props.onSetDescription(instructions, credits);
                         }
