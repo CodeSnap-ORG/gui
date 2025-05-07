@@ -164,8 +164,9 @@ class Interface extends React.Component {
             ...props
         } = this.props;
 
-        // Check if the URL contains 'credits' and 'instructions' parameters
+        // Get URL params and check for 'project_url'
         const urlParams = new URLSearchParams(window.location.search);
+        const hasProjectUrl = urlParams.has('project_url');
         const description = {
             instructions: urlParams.has('instructions') ? urlParams.get('instructions') : 'No instructions provided.',
             credits: urlParams.has('credits') ? urlParams.get('credits') : 'No credits provided.'
@@ -173,6 +174,22 @@ class Interface extends React.Component {
 
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
+
+        // If project_url is not in URL, show default description (CodeSnap alpha stage message)
+        const descriptionMessage = hasProjectUrl ? null : (
+            <div className={styles.section}>
+                <p>
+                    <FormattedMessage
+                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
+                        id="tw.home.ampdescription"
+                        values={{ APP_NAME }}
+                    />
+                </p>
+            </div>
+        );
+
+        // Hide share button if no username in localStorage or if there is a 'project_url'
+        const showShareButton = localStorage.getItem('username') && !hasProjectUrl;
 
         return (
             <div className={classNames(styles.container, {
@@ -199,16 +216,18 @@ class Interface extends React.Component {
                                 }}
                             />
                         </div>
-                        <button
-                            onClick={this.handleShareProject}
-                            className={styles.shareButton}
-                        >
-                            <FormattedMessage
-                                defaultMessage="Share"
-                                description="Share button"
-                                id="tw.shareButton"
-                            />
-                        </button>
+                        {showShareButton && (
+                            <button
+                                onClick={this.handleShareProject}
+                                className={styles.shareButton}
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Share"
+                                    description="Share button"
+                                    id="tw.shareButton"
+                                />
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -225,46 +244,21 @@ class Interface extends React.Component {
                         <>
                             {isBrowserSupported() ? <Clippy isFixed messageSet="player" /> : <BrowserModal isRtl={isRtl} />}
 
-                            {(description.instructions === 'unshared' || description.credits === 'unshared') && (
-                                <div className={classNames(styles.infobox, styles.unsharedUpdate)}>
-                                    <p><FormattedMessage defaultMessage="Unshared projects are no longer visible." id="tw.unshared2.1" /></p>
-                                    <p>
-                                        <FormattedMessage
-                                            defaultMessage="For more information, visit: {link}"
-                                            id="tw.unshared.2"
-                                            values={{
-                                                link: <a href="https://docs.turbowarp.org/unshared-projects" target="_blank" rel="noopener noreferrer">https://docs.turbowarp.org/unshared-projects</a>
-                                            }}
-                                        />
-                                    </p>
-                                    <p><FormattedMessage defaultMessage="If the project was shared recently, this message may appear incorrectly for a few minutes." id="tw.unshared.cache" /></p>
-                                    <p><FormattedMessage defaultMessage="If this project is actually shared, please report a bug." id="tw.unshared.bug" /></p>
-                                </div>
-                            )}
-
-                            {hasCloudVariables && projectId !== '0' && (
-                                <div className={styles.section}><CloudVariableBadge /></div>
-                            )}
-
-                            {(description.instructions || description.credits) && (
-                                <div className={styles.section}>
+                            {hasProjectUrl ? (
+                                <>
                                     <Description
                                         instructions={description.instructions}
                                         credits={description.credits}
                                         projectId={projectId}
                                     />
-                                </div>
+                                </>
+                            ) : (
+                                descriptionMessage
                             )}
 
-                            <div className={styles.section}>
-                                <p>
-                                    <FormattedMessage
-                                        defaultMessage="{APP_NAME} is a more powerful Scratch modification that lets you create complex projects easily. Try it out by clicking See Inside!"
-                                        id="tw.home.ampdescription"
-                                        values={{ APP_NAME }}
-                                    />
-                                </p>
-                            </div>
+                            {hasCloudVariables && projectId !== '0' && (
+                                <div className={styles.section}><CloudVariableBadge /></div>
+                            )}
                         </>
                     )}
                 </div>
