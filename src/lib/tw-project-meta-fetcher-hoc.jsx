@@ -75,7 +75,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                         this.props.onSetAuthor(authorName, authorThumbnail);
                         const instructions = data.instructions || '';
                         const credits = data.description || '';
-                        if(url2.has('author') {
+                        if(url2.has('author')) {
                           const authorName = url.get('author');
                         }
                         if(url2.has('credits') && url2.has('instructions')) {
