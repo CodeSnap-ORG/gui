@@ -1,19 +1,3 @@
-/**
- * Copyright (C) 2021 Thomas Weber
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import React from 'react';
 import { APP_NAME } from '../../lib/brand.js';
 import { FormattedMessage } from 'react-intl';
@@ -44,9 +28,9 @@ const Footer = () => {
     return (
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
+                <div className={styles.footerText}>CodeSnap v{codesnap_version}</div>
+
                 <div className={styles.footerText}>
-                    CodeSnap v{codesnap_version}
-                    <span className={styles.separator}></span>
                     <a className={styles.footerResetData} onClick={eraseData}>
                         <FormattedMessage
                             defaultMessage="Reset data"
@@ -55,6 +39,7 @@ const Footer = () => {
                         />
                     </a>
                 </div>
+
                 <div className={styles.footerText}>
                     <FormattedMessage
                         defaultMessage="{APP_NAME} is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
@@ -72,46 +57,52 @@ const Footer = () => {
                     />
                 </div>
 
-                <div className={styles.footerColumns}>
-                    <div className={styles.footerSection}>
-                        <a href="credits.html">
-                            <FormattedMessage
-                                defaultMessage="Credits"
-                                description="Credits link in footer"
-                                id="tw.footer.credits"
-                            />
-                        </a>
-                    </div>
-                    <div className={styles.footerSection}>
+                <div className={styles.footerText}>
+                    <a href="credits.html">
                         <FormattedMessage
-                            defaultMessage="Documentation and additional tools coming soon."
-                            description="Placeholder for removed links"
-                            id="tw.footer.placeholder"
+                            defaultMessage="Credits"
+                            description="Credits link in footer"
+                            id="tw.footer.credits"
                         />
-                    </div>
-                    <div className={styles.footerSection}>
-                        <a href="https://scratch.mit.edu/discuss/topic/806311">
-                            <FormattedMessage
-                                defaultMessage="AmpMod Forum Topic"
-                                description="Link to AmpMod forum topic"
-                                id="tw.topicButton"
-                            />
-                        </a>
-                        <a href="https://github.com/AmpM0d">
-                            <FormattedMessage
-                                defaultMessage="AmpMod GitHub"
-                                description="Link to AmpMod GitHub"
-                                id="tw.ampmod.github"
-                            />
-                        </a>
-                        <a href="privacy.html">
-                            <FormattedMessage
-                                defaultMessage="Privacy Policy"
-                                description="Link to privacy policy"
-                                id="tw.privacy"
-                            />
-                        </a>
-                    </div>
+                    </a>
+                </div>
+
+                <div className={styles.footerText}>
+                    <FormattedMessage
+                        defaultMessage="Documentation and additional tools coming soon."
+                        description="Placeholder for removed links"
+                        id="tw.footer.placeholder"
+                    />
+                </div>
+
+                <div className={styles.footerText}>
+                    <a href="https://scratch.mit.edu/discuss/topic/806311">
+                        <FormattedMessage
+                            defaultMessage="AmpMod Forum Topic"
+                            description="Link to AmpMod forum topic"
+                            id="tw.topicButton"
+                        />
+                    </a>
+                </div>
+
+                <div className={styles.footerText}>
+                    <a href="https://github.com/AmpM0d">
+                        <FormattedMessage
+                            defaultMessage="AmpMod GitHub"
+                            description="Link to AmpMod GitHub"
+                            id="tw.ampmod.github"
+                        />
+                    </a>
+                </div>
+
+                <div className={styles.footerText}>
+                    <a href="privacy.html">
+                        <FormattedMessage
+                            defaultMessage="Privacy Policy"
+                            description="Link to privacy policy"
+                            id="tw.privacy"
+                        />
+                    </a>
                 </div>
             </div>
             {isAprilFools() && ';'}
