@@ -29,7 +29,7 @@ import Clippy from '../containers/amp-clippy.jsx';
 import Footer from '../components/amp-footer/footer.jsx';
 import styles from './interface.css';
 
-const isInvalidEmbed = window.parent !== window;
+const isInvalidEmbed = false;
 
 const handleClickAddonSettings = addonId => {
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
