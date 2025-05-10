@@ -67,19 +67,48 @@ runAddons();
 class Interface extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            username: localStorage.getItem('username'),
+            isOwner: false,
+            error: ''
+        };
+
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
         this.handleShareProject = this.handleShareProject.bind(this);
         this.handleSignupOrLogin = this.handleSignupOrLogin.bind(this);
-        this.state = {
-            username: '',
-            password: '',
-            error: ''
-        };
+        this.checkProjectOwnership = this.checkProjectOwnership.bind(this);
+    }
+
+    componentDidMount() {
+        const { username } = this.state;
+        const hash = window.location.hash;
+        const match = hash.match(/^#(\d+)$/);
+
+        if (username && match) {
+            const projectId = match[1];
+            this.checkProjectOwnership(projectId).then(isOwner => {
+                if (isOwner) {
+                    this.setState({ isOwner: true });
+                    this.handleShareProject();
+                }
+            });
+        }
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.isLoading && !this.props.isLoading) {
             loadServiceWorker();
+        }
+    }
+
+    async checkProjectOwnership(projectId) {
+        try {
+            const res = await fetch(`https://block-compiler-codesnap.onrender.com/projects/${projectId}/res.json`);
+            const data = await res.json();
+            return data.owner === this.state.username;
+        } catch (e) {
+            console.error('Failed to check project ownership:', e);
+            return false;
         }
     }
 
@@ -89,7 +118,6 @@ class Interface extends React.Component {
 
     handleShareProject() {
         const { vm, projectId, projectName, projectGenre } = this.props;
-
         const projectThumbnail = 'https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg';
         const projectLink = `https://codesnap-org.github.io/projects/?project_url=https://block-compiler-codesnap.onrender.com/projects/${projectId}`;
 
@@ -164,22 +192,17 @@ class Interface extends React.Component {
             ...props
         } = this.props;
 
-        // Get URL params and check for 'project_url'
         const urlParams = new URLSearchParams(window.location.search);
         const hasProjectUrl = urlParams.has('project_url');
         const description = {
-            instructions: urlParams.has('instructions') ? urlParams.get('instructions') : 'No instructions provided.',
-            credits: urlParams.has('credits') ? urlParams.get('credits') : 'No credits provided.'
+            instructions: urlParams.get('instructions') || 'No instructions provided.',
+            credits: urlParams.get('credits') || 'No credits provided.'
         };
+
+        const showShareButton = this.state.username && this.state.isOwner && !hasProjectUrl;
 
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
-
-        // If project_url is not in URL, show default description (CodeSnap alpha stage message)
-        const descriptionMessage = hasProjectUrl ? null : null; // Removed alpha message here
-
-        // Hide share button if no username in localStorage or if there is a 'project_url'
-        const showShareButton = localStorage.getItem('username') && !hasProjectUrl;
 
         return (
             <div className={classNames(styles.container, {
@@ -224,19 +247,13 @@ class Interface extends React.Component {
                     {isHomepage && (
                         <>
                             {isBrowserSupported() ? <Clippy isFixed messageSet="player" /> : <BrowserModal isRtl={isRtl} />}
-
-                            {hasProjectUrl ? (
-                                <>
-                                    <Description
-                                        instructions={description.instructions}
-                                        credits={description.credits}
-                                        projectId={projectId}
-                                    />
-                                </>
-                            ) : (
-                                descriptionMessage
+                            {hasProjectUrl && (
+                                <Description
+                                    instructions={description.instructions}
+                                    credits={description.credits}
+                                    projectId={projectId}
+                                />
                             )}
-
                             {hasCloudVariables && projectId !== '0' && (
                                 <div className={styles.section}><CloudVariableBadge /></div>
                             )}
@@ -274,11 +291,9 @@ const mapStateToProps = state => ({
     projectId: state.scratchGui.projectState.projectId
 });
 
-const mapDispatchToProps = () => ({});
-
 const ConnectedInterface = injectIntl(connect(
     mapStateToProps,
-    mapDispatchToProps
+    () => ({})
 )(Interface));
 
 const WrappedInterface = compose(
