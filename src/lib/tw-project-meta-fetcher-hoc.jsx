@@ -8,8 +8,8 @@ import {setAuthor, setDescription} from '../reducers/tw';
 
 export const fetchProjectMeta = async projectId => {
     const urls = [
-        `https://block-compiler-codesnap.onrender.com//api/projects/${projectId}/meta`,
-        `https://block-compiler-codesnap.onrender.com//api/projects/${projectId}/meta`
+        `https://block-compiler-codesnap.onrender.com/api/projects/${projectId}/meta`,
+        `https://block-compiler-codesnap.onrender.com/api/projects/${projectId}/meta`
     ];
     let firstError;
     for (const url of urls) {
