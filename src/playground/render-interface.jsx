@@ -103,9 +103,9 @@ class Interface extends React.Component {
 
     async checkProjectOwnership(projectId) {
         try {
-            const res = await fetch(`https://block-compiler-codesnap.onrender.com/projects/${projectId}/res.json`);
+            const res = await fetch(`https://block-compiler-codesnap.onrender.com/projects/${projectId}/meta`);
             const data = await res.json();
-            return data.owner === this.state.username;
+            return data.owner === localStorage.getItem('username');
         } catch (e) {
             console.error('Failed to check project ownership:', e);
             return false;
@@ -114,6 +114,7 @@ class Interface extends React.Component {
 
     handleUpdateProjectTitle(title, isDefault) {
         document.title = isDefault || !title ? APP_NAME : `${title} - ${APP_NAME}`;
+        const ptitle = title;
     }
 
     handleShareProject() {
@@ -125,7 +126,7 @@ class Interface extends React.Component {
             const formDataSb3 = new FormData();
             formDataSb3.append('username', localStorage.getItem('username'));
             formDataSb3.append('password', localStorage.getItem('password'));
-            formDataSb3.append('projectName', projectName);
+            formDataSb3.append('projectName', title);
             formDataSb3.append('project', sb3Blob, 'project.sb3');
 
             axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
