@@ -80,7 +80,7 @@ class Interface extends React.Component {
     }
 
     componentDidMount() {
-        const { username } = localStorage.getItem('username');
+        const username = localStorage.getItem('username');
         const hash = window.location.hash;
         const match = hash.match(/^#(\d+)$/);
 
@@ -89,7 +89,6 @@ class Interface extends React.Component {
             this.checkProjectOwnership(projectId).then(isOwner => {
                 if (isOwner) {
                     this.setState({ isOwner: true });
-                    this.handleShareProject();
                 }
             });
         }
@@ -105,7 +104,7 @@ class Interface extends React.Component {
         try {
             const res = await fetch(`https://block-compiler-codesnap.onrender.com/projects/${projectId}/meta`);
             const data = await res.json();
-            return data.owner === localStorage.getItem('username');
+            return data.author === localStorage.getItem('username');
         } catch (e) {
             console.error('Failed to check project ownership:', e);
             return false;
@@ -114,36 +113,29 @@ class Interface extends React.Component {
 
     handleUpdateProjectTitle(title, isDefault) {
         document.title = isDefault || !title ? APP_NAME : `${title} - ${APP_NAME}`;
-        const ptitle = title;
     }
 
     handleShareProject() {
-        const { vm, projectId, projectName, projectGenre } = this.props;
+        const { projectId, projectName, projectGenre } = this.props;
         const projectThumbnail = 'https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg';
         const projectLink = `https://codesnap-org.github.io/projects/?project_url=https://block-compiler-codesnap.onrender.com/projects/${projectId}`;
 
-        vm.saveProjectSb3().then(sb3Blob => {
-            const formDataSb3 = new FormData();
-            formDataSb3.append('username', localStorage.getItem('username'));
-            formDataSb3.append('password', localStorage.getItem('password'));
-            formDataSb3.append('projectName', ptitle);
-            formDataSb3.append('project', sb3Blob, 'project.sb3');
+        const sb3Blob = vm.saveProjectSb3();
 
-            axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
-                .then(() => {
-                    const formDataProject = new FormData();
-                    formDataProject.append('name', projectName);
-                    formDataProject.append('thumbnail', projectThumbnail);
-                    formDataProject.append('genre', projectGenre);
-                    formDataProject.append('link', projectLink);
-                })
-                .catch(err => {
-                    console.error("Error sharing SB3 project:", err);
-                    alert("There was an error sharing the project.");
-                });
+        axios.post('https://block-compiler-codesnap.onrender.com', sb3Blob)
+            .then(() => {
+                const formDataProject = new FormData();
+                formDataProject.append('name', projectName);
+                formDataProject.append('thumbnail', projectThumbnail);
+                formDataProject.append('genre', projectGenre);
+                formDataProject.append('link', projectLink);
+            })
+            .catch(err => {
+                console.error("Error sharing SB3 project:", err);
+                alert("There was an error sharing the project.");
+            });
 
-            alert("Project Shared!");
-        });
+        alert("Project Shared!");
     }
 
     async handleSignupOrLogin() {
@@ -182,16 +174,7 @@ class Interface extends React.Component {
     render() {
         if (isInvalidEmbed) return <InvalidEmbed />;
 
-        const {
-            intl,
-            hasCloudVariables,
-            isFullScreen,
-            isLoading,
-            isPlayerOnly,
-            isRtl,
-            projectId,
-            ...props
-        } = this.props;
+        const { intl, hasCloudVariables, isFullScreen, isLoading, isPlayerOnly, isRtl, projectId, ...props } = this.props;
 
         const urlParams = new URLSearchParams(window.location.search);
         const hasProjectUrl = urlParams.has('project_url');
