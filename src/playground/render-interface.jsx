@@ -80,7 +80,7 @@ class Interface extends React.Component {
     }
 
     componentDidMount() {
-        const { username } = this.state;
+        const { username } = localStorage.getItem('username');
         const hash = window.location.hash;
         const match = hash.match(/^#(\d+)$/);
 
@@ -126,7 +126,7 @@ class Interface extends React.Component {
             const formDataSb3 = new FormData();
             formDataSb3.append('username', localStorage.getItem('username'));
             formDataSb3.append('password', localStorage.getItem('password'));
-            formDataSb3.append('projectName', title);
+            formDataSb3.append('projectName', ptitle);
             formDataSb3.append('project', sb3Blob, 'project.sb3');
 
             axios.post('https://block-compiler-codesnap.onrender.com', formDataSb3)
